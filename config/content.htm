@@ -1,4 +1,56 @@
 <h1>About</h1>
 <p>這裡是<a href="https://www.nfu.edu.tw">國立虎尾科技大學</a>工學院精密機械工程科學會網站:</p>
-<p><a href="https://forupme.github.io">https://forupme.github.io</a></p>
-<p>Github 倉儲: <a href="https://github.com/forupme">https://github.com/forupme</a></p>
+<p>資訊組網站: <a href="https://pme.eng.nfu.edu.tw">https://pme.eng.nfu.edu.tw</a></p>
+<p>本網站 UR: <a href="https://forupme.github.io">https://forupme.github.io</a></p>
+<p>本網站倉儲: <a href="https://github.com/forupme/forupme.github.io">https://github.com/forupme/forupme.github.io</a></p>
+<h1>Fossil SCM</h1>
+<h4>網際伺服器:</h4>
+<p style="padding-left: 30px;">Windows: fossil server C:\pj2022\repo\pj2022.fossil --port 9000 --https</p>
+<p style="padding-left: 30px;">Ubuntu: fossil http /home/pj2022/repository/pj2022.fossil --https --nojail</p>
+<h1>fossiloauth</h1>
+<p>config.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">針對單一倉儲檔案 fossiloauth 中 config.py 設定:
+
+import authomatic
+from authomatic.providers import oauth2
+
+# read client_id and client_secret from safe place other than put into script
+keyFile = open('./../pme_eng_secret.txt', 'r')
+with open('./../pme_eng_secret.txt', 'r') as f:
+    key = f.read().splitlines()
+
+CONFIG = {
+        'google': {
+            'class_': oauth2.Google,
+            'consumer_key': key[0],
+            'consumer_secret': key[1],
+            'scope': oauth2.Google.user_info_scope
+        }
+    }
+
+domain_name = "pme.eng.nfu.edu.tw"
+default_repo = "pme"
+repo_caps = "bfjk234C"
+# for Windows 
+repo_path = "c:/pj2022/repo/"
+# for Ubuntu
+#repo_path = "/home/wcm2021/repository/"
+fossil_port = "443"
+flask_port = "8443"
+uwsgi = True
+
+# derived
+default_repo_path = repo_path+default_repo+".fossil"
+flask_url = "https://"+domain_name+":"+flask_port
+flask_forum = "https://"+domain_name+":"+flask_port+"/forum"
+# for multiple repository
+#login_url = "https://"+domain_name+":"+fossil_port+"/"+default_repo+"/login"
+# for single repository
+login_url = "https://"+domain_name+":"+fossil_port+"/login"
+# for multiple repository
+#forum_url = "https://"+domain_name+":"+fossil_port+"/"+default_repo+"/forum"
+# for single repository
+forum_url = "https://"+domain_name+":"+fossil_port+"/forum"
+CALLBACK_URL = flask_forum
+</pre>
+<p></p>

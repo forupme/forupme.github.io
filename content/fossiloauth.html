@@ -2,6 +2,7 @@
         <head>
         <title>FXXXTech</title>
         <meta charset="utf-8">
+<meta property="head" content="H1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -92,6 +93,7 @@ img.add_border {
 </head>
 <body>
 <div class='container-fluid'><nav>
+        
     <div class="site-wrap">
 
     <div class="site-mobile-menu">
@@ -137,4 +139,100 @@ img.add_border {
           </div>
           
         </header>
-    </nav><section><h1>Site Map</h1><div id="tipue_search_content"></div><ul><li><a href='About.html'>About</a><li><a href='Fossil SCM.html'>Fossil SCM</a><li><a href='fossiloauth.html'>fossiloauth</a></li></ul></section></div></body></html>
+    <div id="tipue_search_content">Fossil SCM << <a href='Fossil SCM.html'>Previous</a> <br /><h1>fossiloauth</h1>
+<p>config.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">針對單一倉儲檔案 fossiloauth 中 config.py 設定:
+
+import authomatic
+from authomatic.providers import oauth2
+
+# read client_id and client_secret from safe place other than put into script
+keyFile = open('./../pme_eng_secret.txt', 'r')
+with open('./../pme_eng_secret.txt', 'r') as f:
+    key = f.read().splitlines()
+
+CONFIG = {
+        'google': {
+            'class_': oauth2.Google,
+            'consumer_key': key[0],
+            'consumer_secret': key[1],
+            'scope': oauth2.Google.user_info_scope
+        }
+    }
+
+domain_name = "pme.eng.nfu.edu.tw"
+default_repo = "pme"
+repo_caps = "bfjk234C"
+# for Windows 
+repo_path = "c:/pj2022/repo/"
+# for Ubuntu
+#repo_path = "/home/wcm2021/repository/"
+fossil_port = "443"
+flask_port = "8443"
+uwsgi = True
+
+# derived
+default_repo_path = repo_path+default_repo+".fossil"
+flask_url = "https://"+domain_name+":"+flask_port
+flask_forum = "https://"+domain_name+":"+flask_port+"/forum"
+# for multiple repository
+#login_url = "https://"+domain_name+":"+fossil_port+"/"+default_repo+"/login"
+# for single repository
+login_url = "https://"+domain_name+":"+fossil_port+"/login"
+# for multiple repository
+#forum_url = "https://"+domain_name+":"+fossil_port+"/"+default_repo+"/forum"
+# for single repository
+forum_url = "https://"+domain_name+":"+fossil_port+"/forum"
+CALLBACK_URL = flask_forum
+</pre>
+<p></p><br />Fossil SCM << <a href='Fossil SCM.html'>Previous</a> </div>
+        
+    <!-- footer -->
+      <div class="container">
+        <div class="row pt-3 mx-auto">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+        </div>
+      </div>
+    <!-- for footer -->
+    
+        </div> <!-- for site wrap -->
+            <!-- <script src="../cmsimde/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+            <script src="../cmsimde/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery-ui.js"></script>
+            <script src="../cmsimde/static/chimper/js/popper.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/owl.carousel.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.stellar.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.countdown.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.magnific-popup.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap-datepicker.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/aos.js"></script>
+            <!--
+            <script src="../cmsimde/static/chimper/js/typed.js"></script>
+                    <script>
+                    var typed = new Typed('.typed-words', {
+                    strings: ["Web Apps"," WordPress"," Mobile Apps"],
+                    typeSpeed: 80,
+                    backSpeed: 80,
+                    backDelay: 4000,
+                    startDelay: 1000,
+                    loop: true,
+                    showCursor: true
+                    });
+                    </script>
+            -->
+            <script src="../cmsimde/static/chimper/js/main.js"></script>
+        
+<!-- 啟用 LaTeX equations 編輯 -->
+  <!-- <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\(', '\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
+    </body></html>
+        
