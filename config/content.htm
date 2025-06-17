@@ -58,7 +58,69 @@ CALLBACK_URL = flask_forum
 <p style="padding-left: 60px;"><a href="https://pme.eng.nfu.edu.tw:8443">https://pme.eng.nfu.edu.tw:8443</a></p>
 <h4>Authorised redirect URIs</h4>
 <p style="padding-left: 60px;"><a href="https://pme.eng.nfu.edu.tw:8443/login/google/">https://pme.eng.nfu.edu.tw:8443/login/google/</a></p>
-<h1>Brython</h1>
+<h1>GW</h1>
+<p>Google Workspace 應用:</p>
+<p><a href="https://edu.google.com/intl/ALL_tw/workspace-for-education/editions/overview/">https://edu.google.com/intl/ALL_tw/workspace-for-education/editions/overview/</a> </p>
+<p>使用 Python + Flask 建立一個網頁介面，讓管理員透過網頁表單自動在 Google Workspace（前 G Suite）中建立新的 email address（即新增用戶）。<br/><br/>必備條件:<br/><br/>1. Google Workspace 管理員權限：你必須擁有管理員帳號才能新增使用者。<br/>2. Google Cloud Platform 專案：你需要在 GCP 建立一個專案並啟用 [Admin SDK API](https://console.developers.google.com/apis/library/admin.googleapis.com)。<br/>3. 建立服務帳戶（Service Account）並授權 Domain-wide Delegation：這樣 Flask 應用就能以管理員身分進行操作。<br/>4. 下載服務帳戶金鑰（JSON）：Flask 會用這個來驗證。<br/>5. 設定 Google Workspace 的管理員 Email：Flask 會用於 impersonate。<br/><br/>安裝模組:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">pip install flask google-api-python-client google-auth google-auth-oauthlib google-auth-httplib2</pre>
+<p>範例程式:<br/><br/></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask, request, render_template_string
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+
+app = Flask(__name__)
+
+# 服務帳戶金鑰路徑
+SERVICE_ACCOUNT_FILE = 'path/to/your/service-account.json'
+# 管理員 email
+ADMIN_EMAIL = 'admin@yourdomain.com'
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    msg = ''
+    if request.method == 'POST':
+        user_email = request.form['email']
+        password = request.form['password']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        # 建立新使用者
+        result = create_google_user(user_email, password, first_name, last_name)
+        msg = '帳號建立成功' if result else '建立失敗'
+    return render_template_string("""
+        &lt;form method="post"&gt;
+            Email: &lt;input name="email"&gt;&lt;br&gt;
+            密碼: &lt;input name="password"&gt;&lt;br&gt;
+            名: &lt;input name="first_name"&gt;&lt;br&gt;
+            姓: &lt;input name="last_name"&gt;&lt;br&gt;
+            &lt;button type="submit"&gt;建立&lt;/button&gt;
+        &lt;/form&gt;
+        &lt;p&gt;{{ msg }}&lt;/p&gt;
+    """, msg=msg)
+
+def create_google_user(email, password, first_name, last_name):
+    SCOPES = ['https://www.googleapis.com/auth/admin.directory.user']
+    creds = service_account.Credentials.from_service_account_file(
+        SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    delegated_creds = creds.with_subject(ADMIN_EMAIL)
+    service = build('admin', 'directory_v1', credentials=delegated_creds)
+    user_info = {
+        "primaryEmail": email,
+        "password": password,
+        "name": {
+            "givenName": first_name,
+            "familyName": last_name
+        }
+    }
+    try:
+        service.users().insert(body=user_info).execute()
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+if __name__ == '__main__':
+    app.run(debug=True)</pre>
+<p><br/>注意事項:<br/><br/>1. 服務帳戶要開啟「網域範圍授權」（Domain-wide Delegation），管理員要在 Google Workspace 控制台授權該服務帳戶操作指定的範圍。<br/>3. 密碼建議強度：可以加強密碼生成與驗證。<br/>4. 部署建議：請勿將服務帳戶金鑰暴露於公開網路。<br/>5. 安全性：建議加入認證機制，避免未授權使用。</p><h1>Brython</h1>
 <p><button id="add1to100">1 add to 100</button></p>
 <!-- 導入 brython 程式庫 -->
 <p>
