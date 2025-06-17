@@ -1,7 +1,8 @@
 <h1>About</h1>
 <p>這裡是 ENG 工程網站:</p>
 <p>本網站 UR: <a href="https://eng.nfu.edu.tw">https://eng.nfu.edu.tw</a> </p>
-<p>本網站倉儲: <a href="https://github.com/forupme/forupme.github.io">https://github.com/forupme/forupme.github.io</a></p><h2>MISC</h2>
+<p>本網站倉儲: <a href="https://github.com/forupme/forupme.github.io">https://github.com/forupme/forupme.github.io</a></p>
+<h2>MISC</h2>
 <h4>Fossil SCM</h4>
 <h4>網際伺服器:</h4>
 <p style="padding-left: 30px;">Windows: fossil server C:\pj2022\repo\pj2022.fossil --port 9000 --https</p>
@@ -120,13 +121,563 @@ def create_google_user(email, password, first_name, last_name):
 
 if __name__ == '__main__':
     app.run(debug=True)</pre>
-<p><br/>注意事項:<br/><br/>1. 服務帳戶要開啟「網域範圍授權」（Domain-wide Delegation），管理員要在 Google Workspace 控制台授權該服務帳戶操作指定的範圍。<br/>3. 密碼建議強度：可以加強密碼生成與驗證。<br/>4. 部署建議：請勿將服務帳戶金鑰暴露於公開網路。<br/>5. 安全性：建議加入認證機制，避免未授權使用。</p><h1>Reeborg</h1>
+<p><br/>注意事項:<br/><br/>1. 服務帳戶要開啟「網域範圍授權」（Domain-wide Delegation），管理員要在 Google Workspace 控制台授權該服務帳戶操作指定的範圍。<br/>3. 密碼建議強度：可以加強密碼生成與驗證。<br/>4. 部署建議：請勿將服務帳戶金鑰暴露於公開網路。<br/>5. 安全性：建議加入認證機制，避免未授權使用。</p>
+<h1>Reeborg</h1>
 <p><a href="https://eng.nfu.edu.tw/reeborg">https://eng.nfu.edu.tw/reeborg</a> </p>
 <p>假如利用相對路徑呼叫 URL 變數值:</p>
 <p>以下為單數行面向北收成後，雙數行向南收成。</p>
 <p><a href="https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1.py">https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1.py</a> </p>
 <p>以下則為東西方向收成。</p>
-<p><a href="https://mdewcm2025.github.io/hw-scrum-1/reeborg/?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1_east_west.py">https://mdewcm2025.github.io/hw-scrum-1/reeborg/?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1_east_west.py</a> </p><h1>Brython</h1>
+<p><a href="https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1_east_west.py">https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1_east_west.py </a> </p>
+<h1>NX2312</h1>
+<p>NXOpen 範例: <a href="https://github.com/mdecycu/nxopen">https://github.com/mdecycu/nxopen</a> </p>
+<p>截至 2024 年 6 月，Siemens NX（Siemens Digital Industries Software 的旗艦 CAD/CAM/CAE 解決方案）尚未正式宣布其產品將「全部」轉為 SaaS（Software as a Service，雲端服務）模式。以下是現況與未來趨勢的分析：</p>
+<h4>現況說明</h4>
+<ul>
+<li><strong>混合授權模式</strong>：目前 Siemens NX 提供傳統本地端安裝（on-premise）、浮動授權與雲端授權（Cloud Connected Licensing）等多種方式。</li>
+<li><strong>雲端與 SaaS 進展</strong>：
+<ul>
+<li>Siemens 近年積極推動其 Xcelerator 雲端平台，並陸續推出 Teamcenter X、NX X 等 SaaS 產品線。</li>
+<li>Siemens NX 已能透過雲端桌面、虛擬化等方式運作，但 NX 的 SaaS 版本（NX X）目前仍屬於部分功能雲端化，並非完全替代本地端。</li>
+<li>Siemens 官方強調會「持續支援混合部署」（hybrid deployment），以配合不同行業、地區的 IT 政策與資料安全需求。</li>
+</ul>
+</li>
+</ul>
+<h4>未來趨勢（預測）</h4>
+<ul>
+<li><strong>逐步推進 SaaS</strong>：全球 CAD/CAM 巨頭（如 Autodesk, PTC, Dassault Systèmes）都在加速 SaaS 轉型，Siemens 也不例外，但考量現有大型工業客戶的需求，完全移除本地端安裝在短期內機率不高。</li>
+<li><strong>靈活選擇</strong>：預計未來 5-10 年內，Siemens NX 會維持本地端與 SaaS 雙軌並行，讓客戶根據需求選擇。</li>
+<li><strong>SaaS 比重提升</strong>：隨著雲端安全與效能提升，以及企業 IT 策略轉型，SaaS 模式的比重會逐年提高。</li>
+</ul>
+<h4>後續議題:</h4>
+<p style="padding-left: 30px;">NXOpen 的程式架構, 一旦轉為 Saas 後, 請說明其後續應用模式大致如何?</p>
+<p>將 <strong>NXOpen</strong> 的程式架構轉為 <strong>SaaS（Software as a Service）</strong> 模式後，會對其<strong>開發方式、部署方式、客戶使用習慣、整合介面與授權模式</strong>產生重大變化。以下是轉為 SaaS 模式後的 <strong>後續應用模式解析</strong>：</p>
+<hr/>
+<h4>🔧 一、NXOpen 是什麼？</h4>
+<p><strong>NXOpen</strong> 是 Siemens NX 提供的一套 API（支援 C++, C#, VB.NET, Java、Python），讓用戶能夠對 NX CAD/CAM/CAE 系統進行客製化與二次開發。</p>
+<hr/>
+<h4>☁️ 二、轉為 SaaS 模式後的主要應用變化：</h4>
+<p><br/>1. <strong>開發與部署模式轉變：從本機執行變為雲端整合</strong></p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>傳統 NXOpen</th>
+<th>SaaS 化後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>執行位置</td>
+<td>本機 NX 軟體上執行 plug-in 或 API 呼叫</td>
+<td>透過 Web API / 雲端平台觸發</td>
+</tr>
+<tr>
+<td>程式部署</td>
+<td>安裝 DLL 或 script 到本地端</td>
+<td>部署於雲端容器 / 微服務架構</td>
+</tr>
+<tr>
+<td>整合方式</td>
+<td>使用本機 NX COM 或 Open API</td>
+<td>使用 RESTful API / GraphQL / Webhook</td>
+</tr>
+</tbody>
+</table>
+<h4>✅ SaaS 模式下：</h4>
+<ul>
+<li>
+<p>NX 本體可能以虛擬桌面、Web NX（若 Siemens 支援）或 Hybrid WebApp 的方式提供</p>
+</li>
+<li>
+<p>開發者將客製功能部署在雲端，可藉由 HTTP API 被用戶端（甚至非 NX 應用）呼叫</p>
+</li>
+</ul>
+<hr/>
+<p><br/>2. <strong>模組化與微服務化</strong></p>
+<ul>
+<li>
+<p>傳統 NXOpen 開發的是 plug-in 或宏指令，SaaS 模式則可拆成「功能模組微服務」：</p>
+<ul>
+<li>
+<p>例如：「自動建模」、「幾何驗證」、「刀具路徑最佳化」等功能做為 API 提供</p>
+</li>
+<li>
+<p>每個功能可被其他內部/外部系統串接（如 PLM、MES、BOM 系統）</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<p><br/>3. <strong>資料傳輸與儲存改變</strong></p>
+<ul>
+<li>
+<p>使用者的 3D 模型、幾何參數可能上傳至雲端伺服器</p>
+</li>
+<li>
+<p>可支援版本控管、多人協同操作、異地編輯等功能</p>
+</li>
+<li>
+<p>與 Teamcenter、Cloud PLM 無縫整合</p>
+</li>
+</ul>
+<hr/>
+<p><br/>4. <strong>使用者互動模式</strong></p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>傳統</th>
+<th>SaaS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>使用界面</td>
+<td>本地 NX GUI 操作</td>
+<td>Web-based NX、API 呼叫、輕量介面（如瀏覽器）</td>
+</tr>
+<tr>
+<td>客製 UI</td>
+<td>插件型窗口、Form</td>
+<td>Web App、Dashboard、雲端協同平台</td>
+</tr>
+<tr>
+<td>使用者</td>
+<td>單一工程師使用</td>
+<td>多人協同（設計、製造、客戶）即時互動</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<p><br/>5. <strong>授權與訂閱模式</strong></p>
+<ul>
+<li>
+<p>傳統 NX 授權基於安裝主機的 License</p>
+</li>
+<li>
+<p>SaaS 模式改為 <strong>基於用量（Usage-based）</strong> 或 <strong>訂閱（Subscription）</strong></p>
+<ul>
+<li>
+<p>按 API 呼叫數量計費</p>
+</li>
+<li>
+<p>按帳戶使用時間、功能模組區分計費</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<p><br/>6. <strong>後續可能的應用場景</strong></p>
+<ul>
+<li>
+<p>✅ 自動化設計平台（例如 Web UI 輸入參數 → 雲端 NX 建模 → 下載 STEP）</p>
+</li>
+<li>
+<p>✅ 多人協同設計（像 Google Docs 那樣的 CAD 協作）</p>
+</li>
+<li>
+<p>✅ 與 AI 系統整合（AI 生成設計草圖，SaaS API 執行建模驗證）</p>
+</li>
+<li>
+<p>✅ 和製造雲端 MES 或供應鏈平台整合，做自動流程串接</p>
+</li>
+</ul>
+<hr/>
+<h4>🧭 總結</h4>
+<p>轉為 SaaS 模式後，NXOpen 不再只是「開發者在本地 NX 上開發插件」，而是變成<strong>可被任意雲端平台呼叫的 CAD 智能功能服務（Engineering-as-a-Service）</strong>。這樣的模式有利於企業：</p>
+<ul>
+<li>
+<p>簡化部署與維運</p>
+</li>
+<li>
+<p>更快導入自動化流程</p>
+</li>
+<li>
+<p>支援全球團隊協同作業</p>
+</li>
+<li>
+<p>更靈活的成本控制與計費</p>
+</li>
+</ul>
+<hr/>
+<p data-pm-slice="0 0 []">延伸議題:</p>
+<p data-pm-slice="0 0 []" style="padding-left: 30px;">之後的機械設計工程師若要使用 NXOpen 是否必須具備更多的 Web based programming 技術?</p>
+<p>是的，<strong>未來的機械設計工程師若要在 NXOpen 的 SaaS 環境中開發或應用客製化功能，勢必需要具備更多 Web-based programming 技術與知識</strong>，原因如下：</p>
+<hr/>
+<h4>✅ 為什麼需要 Web-based Programming 技術？</h4>
+<p><br/>1. <strong>開發介面從本地 API 轉向雲端 API</strong></p>
+<ul>
+<li>
+<p>過去：使用 C++ / C# 呼叫 NXOpen 的本地 DLL</p>
+</li>
+<li>
+<p>未來：透過 RESTful API、GraphQL 等 Web 介面來存取 NX 雲端功能</p>
+</li>
+</ul>
+<p>➡️ 工程師需要了解：</p>
+<ul>
+<li>
+<p><strong>HTTP 請求（GET/POST）</strong></p>
+</li>
+<li>
+<p><strong>JSON 資料格式</strong></p>
+</li>
+<li>
+<p><strong>API 認證（Token, OAuth）</strong></p>
+</li>
+</ul>
+<hr/>
+<p><br/>2. <strong>前端互動越來越重要</strong></p>
+<p>若未來使用 NX Web 平台（或其整合式 UI），工程師可能要：</p>
+<ul>
+<li>
+<p>設計客製化的網頁表單</p>
+</li>
+<li>
+<p>用 JavaScript 與 NX API 互動</p>
+</li>
+</ul>
+<p>➡️ 建議學會：</p>
+<ul>
+<li>
+<p><strong>JavaScript / TypeScript</strong></p>
+</li>
+<li>
+<p><strong>React / Vue 等前端框架</strong></p>
+</li>
+<li>
+<p><strong>HTML5 / CSS3 基礎</strong></p>
+</li>
+</ul>
+<hr/>
+<p><br/>3. <strong>微服務與自動化流程</strong></p>
+<p>許多 SaaS 架構會將功能模組化為微服務，例如：</p>
+<ul>
+<li>
+<p>自動建模服務</p>
+</li>
+<li>
+<p>自動生成工程圖服務</p>
+</li>
+</ul>
+<p>這些都可能透過 Webhook 或 API 觸發。機械設計工程師需要能：</p>
+<ul>
+<li>
+<p>建立 pipeline（例如 Python 腳本串接 Web API）</p>
+</li>
+<li>
+<p>撰寫跨平台的資料流程（如將 NX 資料傳給 PLM 或 CAM 系統）</p>
+</li>
+</ul>
+<p>➡️ 工具建議：</p>
+<ul>
+<li>
+<p>Python（結合 Flask / FastAPI 做簡易服務）</p>
+</li>
+<li>
+<p>Git / CI/CD 概念</p>
+</li>
+<li>
+<p>基礎的 Docker 容器知識</p>
+</li>
+</ul>
+<hr/>
+<h4>🧠 所以未來的「NXOpen 工程師」會長這樣：</h4>
+<table>
+<thead>
+<tr>
+<th>能力領域</th>
+<th>需懂技術</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>機械設計知識</td>
+<td>Solid modeling, PMI, CAE 概念</td>
+<td>工程本質還是設計</td>
+</tr>
+<tr>
+<td>雲端 API 串接</td>
+<td>RESTful API, JSON</td>
+<td>呼叫 SaaS 平台功能</td>
+</tr>
+<tr>
+<td>Web UI 開發（選配）</td>
+<td>JavaScript, React</td>
+<td>若需設計互動界面</td>
+</tr>
+<tr>
+<td>資料流與整合</td>
+<td>Python, Webhook, Git</td>
+<td>自動化與系統串接需求</td>
+</tr>
+<tr>
+<td>安全與授權</td>
+<td>OAuth, JWT</td>
+<td>Web API 呼叫需要身份驗證</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h4>🎯 小結</h4>
+<p>未來使用 NXOpen 的工程師，尤其若參與企業數位轉型或雲端化開發專案，勢必要具備 <strong>Web-based programming 的基礎能力</strong>。這並不代表要成為全職 Web 工程師，但需要：</p>
+<ul>
+<li>
+<p>能看懂 API 文件</p>
+</li>
+<li>
+<p>能用 Python / JavaScript 寫簡單整合程式</p>
+</li>
+<li>
+<p>理解前後端如何協作</p>
+</li>
+</ul>
+<hr/>
+<p>當前機械工程師面對的是一個快速數位化的產業環境，尤其在 CAD/CAE 平台（如 NX）逐步 SaaS 化、自動化與智能化的趨勢下，<strong>具備跨界的程式設計與系統整合能力</strong>變得非常重要。以下是我為「機械背景工程師」設計的 <strong>分階段、實務導向的學習路線圖</strong>，強調從無基礎到具備 SaaS 架構開發與應用能力。</p>
+<hr/>
+<h4>🎯 學習目標總覽</h4>
+<table>
+<thead>
+<tr>
+<th>階段</th>
+<th>能力核心</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>入門階段</td>
+<td>基本程式能力</td>
+<td>能看懂、撰寫簡單自動化腳本</td>
+</tr>
+<tr>
+<td>成長階段</td>
+<td>API 串接與資料處理</td>
+<td>能與 NX SaaS 功能對接</td>
+</tr>
+<tr>
+<td>進階階段</td>
+<td>Web 應用與自動化架構</td>
+<td>能開發雲端工具或整合流程</td>
+</tr>
+<tr>
+<td>專業階段</td>
+<td>微服務與 DevOps 概念</td>
+<td>能部署工程服務並參與企業級專案</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h4>🧩【第一階段：程式設計入門】🔰</h4>
+<blockquote>
+<p>適合從沒學過程式的工程師</p>
+</blockquote>
+<h4>🔹 學習內容</h4>
+<ul>
+<li>
+<p>Python 基礎語法（變數、條件、迴圈）</p>
+</li>
+<li>
+<p>函式與模組概念</p>
+</li>
+<li>
+<p>檔案處理（CSV, JSON）</p>
+</li>
+<li>
+<p>程式邏輯與問題拆解</p>
+</li>
+</ul><h3>✅ 建議工具/平台</h3>
+<ul>
+<li>
+<p>Python（建議選擇）</p>
+</li>
+<li>
+<p>VS Code</p>
+</li>
+<li>
+<p>線上學習：Codecademy、Coursera（Python for Everybody）</p>
+</li>
+</ul>
+<h4>📌 實作範例</h4>
+<ul>
+<li>
+<p>寫一支自動命名圖檔的工具</p>
+</li>
+<li>
+<p>解析 CSV 製造清單，自動計算總成本</p>
+</li>
+</ul>
+<hr/>
+<h4>🧩【第二階段：NX API 與 Web 串接】🔗</h4>
+<blockquote>
+<p>為連接 SaaS NX 系統做好準備</p>
+</blockquote>
+<h4>🔹 學習內容</h4>
+<ul>
+<li>
+<p>NXOpen（C# or Python）API 概念與結構</p>
+</li>
+<li>
+<p>RESTful API 基礎（GET / POST / Header）</p>
+</li>
+<li>
+<p>JSON 結構與資料轉換</p>
+</li>
+<li>
+<p>呼叫 NX SaaS 的 API（假設已公開）</p>
+</li>
+</ul>
+<h4>✅ 建議工具</h4>
+<ul>
+<li>
+<p>Postman（測試 API）</p>
+</li>
+<li>
+<p>Python requests 套件</p>
+</li>
+<li>
+<p>熟悉 NX 本地端 API（必要時）</p>
+</li>
+</ul>
+<h4>📌 實作範例</h4>
+<ul>
+<li>
+<p>使用 Python 呼叫 NX 雲端 API，自動建立 3D 模型</p>
+</li>
+<li>
+<p>把本地 NX 生成的資料上傳到 Web 系統</p>
+</li>
+</ul>
+<hr/>
+<h4>🧩【第三階段：Web 前端與後端應用】🌐</h4>
+<blockquote>
+<p>讓你能設計前端輸入畫面，後端處理模型或資料</p>
+</blockquote>
+<h4>🔹 學習內容</h4>
+<ul>
+<li>
+<p>HTML5 / CSS3 / JavaScript 基礎</p>
+</li>
+<li>
+<p>使用 React.js 製作互動介面</p>
+</li>
+<li>
+<p>Python + Flask（或 FastAPI）作為後端 API 伺服器</p>
+</li>
+<li>
+<p>網頁如何觸發模型運算或匯出圖檔</p>
+</li>
+</ul>
+<h4>✅ 建議工具</h4>
+<ul>
+<li>
+<p>GitHub、VS Code、React + Flask 專案模板</p>
+</li>
+<li>
+<p>Docker 基礎（可選）</p>
+</li>
+</ul>
+<h4>📌 實作範例</h4>
+<ul>
+<li>
+<p>建立一個「線上建模輸入系統」：用戶輸入尺寸 → 後端呼叫 NX SaaS API → 顯示模型預覽</p>
+</li>
+<li>
+<p>前端 UI 控制不同模組組合，動態產生 3D 零件</p>
+</li>
+</ul>
+<hr/>
+<h4>🧩【第四階段：整合與部署工程平台】🚀</h4>
+<blockquote>
+<p>可參與企業專案，或打造自己的工程應用服務</p>
+</blockquote>
+<h4>🔹 學習內容</h4>
+<ul>
+<li>
+<p>軟體架構：MVC、API Gateway、資料庫整合</p>
+</li>
+<li>
+<p>使用 Git + CI/CD（GitHub Actions）</p>
+</li>
+<li>
+<p>雲端部署（AWS/GCP/Azure）</p>
+</li>
+<li>
+<p>OAuth / Token 身分驗證</p>
+</li>
+</ul>
+<h4>✅ 工具建議</h4>
+<ul>
+<li>
+<p>Docker + Docker Compose</p>
+</li>
+<li>
+<p>GitHub + Netlify / Railway / Vercel</p>
+</li>
+<li>
+<p>Kubernetes（進階）</p>
+</li>
+</ul>
+<h4>📌 實作範例</h4>
+<ul>
+<li>
+<p>將工程設計 SaaS 工具部署上雲端，提供 API 給企業內部使用</p>
+</li>
+<li>
+<p>整合 NX SaaS + PLM + ERP 的工作流程</p>
+</li>
+</ul>
+<hr/>
+<h4>📚 推薦資源</h4>
+<table>
+<thead>
+<tr>
+<th>類型</th>
+<th>資源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python 入門</td>
+<td><a href="https://www.coursera.org/specializations/python">Python for Everybody（Coursera）</a></td>
+</tr>
+<tr>
+<td>Web 前端</td>
+<td><a href="https://www.freecodecamp.org/">freeCodeCamp</a></td>
+</tr>
+<tr>
+<td>REST API</td>
+<td><a href="https://learning.postman.com/">Postman Learn</a></td>
+</tr>
+<tr>
+<td>NXOpen</td>
+<td>Siemens 官方文件 + GitHub 上的開源專案</td>
+</tr>
+<tr>
+<td>DevOps / 雲端</td>
+<td><a href="https://docker-curriculum.com/">Docker 教學</a>、<a href="https://skillbuilder.aws/">AWS Skill Builder</a></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h4>✅ 結語與建議</h4>
+<p>你<strong>不需要成為全職軟體工程師</strong>，但未來的機械工程師會是：</p>
+<ul>
+<li>
+<p>能開發簡易自動化工具</p>
+</li>
+<li>
+<p>會串接 SaaS CAD 平台與企業系統</p>
+</li>
+<li>
+<p>理解 Web 技術，能與 IT 部門協作開發</p>
+</li>
+</ul>
+<p>🌟 最重要的是 <strong>從小任務開始實作，逐步構建信心與能力</strong>。</p>
+<hr/>
+<p></p><h1>Brython</h1>
 <p><button id="add1to100">1 add to 100</button></p>
 <!-- 導入 brython 程式庫 -->
 <p>
