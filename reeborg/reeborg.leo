@@ -69,7 +69,6 @@
 </v>
 </v>
 <v t="leo.20250320123819.1"><vh>程式碼解析</vh></v>
-<v t="leo.20250515135921.1"><vh>修改註記</vh></v>
 <v t="leo.20250424210319.1"><vh>imported files</vh>
 <v t="leo.20250424210319.2"><vh>path: ./rb/</vh>
 <v t="leo.20250424210319.3"><vh>@clean reeborg.js</vh>
@@ -5970,9 +5969,7 @@ function set_initial_state() {
     // parts. In this case, we have to make sure that we do not
     // retrieve the last saved values by mistake
     RUR.state.world_url = decodeURIComponent(url_query.queryKey.url);
-    RUR.state.world_name = decodeURIComponent(url_query.queryKey.name);
-    // Kmolab add the editor variable
-    RUR.state.world_editor = decodeURIComponent(url_query.queryKey.editor);
+    RUR.state.world_name = decodeURIComponent(url_query.queryKey.name);    
 
     // correct potentially faulty values
     if (probably_invalid(RUR.state.world_url)) {
@@ -6080,8 +6077,9 @@ function set_initial_state() {
     if (RUR.file_io_status == "no link") {
         RUR.make_default_menu(RUR.state.human_language);
     }
-    
+
     RUR.state.creating_menu = false;
+
 }
 </t>
 <t tx="leo.20250424210323.131">function restore_blockly () {
@@ -6719,13 +6717,12 @@ RUR.permalink.update_URI = function() {
         permalink += ":" + url_query.port;
     }
     permalink += url_query.path;
-    // Kmolab add RUR.state.world_editor starting from set_initial_state function
+
     permalink += "?lang=" + encodeURIComponent(RUR.state.human_language) +
                  "&amp;mode=" + encodeURIComponent(RUR.state.input_method) +
                  "&amp;menu=" + encodeURIComponent(RUR.state.current_menu) +                 
                  "&amp;name=" + encodeURIComponent(RUR.state.world_name) +
-                 "&amp;url=" + encodeURIComponent(RUR.state.world_url) +
-                 "&amp;editor=" + encodeURIComponent(RUR.state.world_editor);
+                 "&amp;url=" + encodeURIComponent(RUR.state.world_url);
     window.history.pushState("dummy", "dummy", permalink);
 };
 </t>
@@ -26332,6 +26329,5 @@ UsedRobot.prototype.ist_vorne_frei = function () {
     return RUR._UR.object_here_(this.body, obj);
 };
 </t>
-<t tx="leo.20250515135921.1">在 set_initial_state 與 RUR.permalink.update_URI 中納入 URL editor 變數, 執行後連結會保留 editor 變數的設定值</t>
 </tnodes>
 </leo_file>

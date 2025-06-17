@@ -3649,9 +3649,7 @@ function set_initial_state() {
     // parts. In this case, we have to make sure that we do not
     // retrieve the last saved values by mistake
     RUR.state.world_url = decodeURIComponent(url_query.queryKey.url);
-    RUR.state.world_name = decodeURIComponent(url_query.queryKey.name);
-    // Kmolab add the editor variable
-    RUR.state.world_editor = decodeURIComponent(url_query.queryKey.editor);
+    RUR.state.world_name = decodeURIComponent(url_query.queryKey.name);    
 
     // correct potentially faulty values
     if (probably_invalid(RUR.state.world_url)) {
@@ -3751,8 +3749,9 @@ function set_initial_menu(url_query) {
     if (RUR.file_io_status == "no link") {
         RUR.make_default_menu(RUR.state.human_language);
     }
-    
+
     RUR.state.creating_menu = false;
+
 }
 function restore_blockly () {
     try {
@@ -5344,13 +5343,12 @@ RUR.permalink.update_URI = function() {
         permalink += ":" + url_query.port;
     }
     permalink += url_query.path;
-    // Kmolab add RUR.state.world_editor starting from set_initial_state function
+
     permalink += "?lang=" + encodeURIComponent(RUR.state.human_language) +
                  "&mode=" + encodeURIComponent(RUR.state.input_method) +
                  "&menu=" + encodeURIComponent(RUR.state.current_menu) +                 
                  "&name=" + encodeURIComponent(RUR.state.world_name) +
-                 "&url=" + encodeURIComponent(RUR.state.world_url) +
-                 "&editor=" + encodeURIComponent(RUR.state.world_editor);
+                 "&url=" + encodeURIComponent(RUR.state.world_url);
     window.history.pushState("dummy", "dummy", permalink);
 };
 },{"./../rur.js":44}],22:[function(require,module,exports){

@@ -131,7 +131,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li><a href='MISC.html'>MISC</a></li></ul><li><a href='GW.html'>GW</a><li><a href='Brython.html'>Brython</a></li>
+                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li><a href='MISC.html'>MISC</a></li></ul><li><a href='GW.html'>GW</a><li><a href='Reeborg.html'>Reeborg</a><li><a href='Brython.html'>Brython</a></li>
                       </ul>
                 </nav>
               </div>
@@ -142,7 +142,7 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">MISC << <a href='MISC.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython<br /><h1>GW</h1>
+    <div id="tipue_search_content">MISC << <a href='MISC.html'>Previous</a> <a href='Reeborg.html'>Next</a> >> Reeborg<br /><h1>GW</h1>
 <p>Google Workspace 應用:</p>
 <p><a href="https://edu.google.com/intl/ALL_tw/workspace-for-education/editions/overview/">https://edu.google.com/intl/ALL_tw/workspace-for-education/editions/overview/</a> </p>
 <p>使用 Python + Flask 建立一個網頁介面，讓管理員透過網頁表單自動在 Google Workspace（前 G Suite）中建立新的 email address（即新增用戶）。<br/><br/>必備條件:<br/><br/>1. Google Workspace 管理員權限：你必須擁有管理員帳號才能新增使用者。<br/>2. Google Cloud Platform 專案：你需要在 GCP 建立一個專案並啟用 [Admin SDK API](https://console.developers.google.com/apis/library/admin.googleapis.com)。<br/>3. 建立服務帳戶（Service Account）並授權 Domain-wide Delegation：這樣 Flask 應用就能以管理員身分進行操作。<br/>4. 下載服務帳戶金鑰（JSON）：Flask 會用這個來驗證。<br/>5. 設定 Google Workspace 的管理員 Email：Flask 會用於 impersonate。<br/><br/>安裝模組:</p>
@@ -204,7 +204,7 @@ def create_google_user(email, password, first_name, last_name):
 
 if __name__ == '__main__':
     app.run(debug=True)</pre>
-<p><br/>注意事項:<br/><br/>1. 服務帳戶要開啟「網域範圍授權」（Domain-wide Delegation），管理員要在 Google Workspace 控制台授權該服務帳戶操作指定的範圍。<br/>3. 密碼建議強度：可以加強密碼生成與驗證。<br/>4. 部署建議：請勿將服務帳戶金鑰暴露於公開網路。<br/>5. 安全性：建議加入認證機制，避免未授權使用。</p><br />MISC << <a href='MISC.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython</div>
+<p><br/>注意事項:<br/><br/>1. 服務帳戶要開啟「網域範圍授權」（Domain-wide Delegation），管理員要在 Google Workspace 控制台授權該服務帳戶操作指定的範圍。<br/>3. 密碼建議強度：可以加強密碼生成與驗證。<br/>4. 部署建議：請勿將服務帳戶金鑰暴露於公開網路。<br/>5. 安全性：建議加入認證機制，避免未授權使用。</p><br />MISC << <a href='MISC.html'>Previous</a> <a href='Reeborg.html'>Next</a> >> Reeborg</div>
         
     <!-- footer -->
       <div class="container">
