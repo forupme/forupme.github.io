@@ -1,8 +1,7 @@
 <h1>About</h1>
-<p>這裡是 ENG 工程網站:</p>
+<p>這裡是 ENGroup 網站:</p>
 <p>本網站 UR: <a href="https://eng.nfu.edu.tw">https://eng.nfu.edu.tw</a> </p>
-<p>本網站倉儲: <a href="https://github.com/forupme/forupme.github.io">https://github.com/forupme/forupme.github.io</a></p>
-<h2>MISC</h2>
+<p>本網站倉儲: <a href="https://github.com/forupme/forupme.github.io">https://github.com/forupme/forupme.github.io</a></p><h2>MISC</h2>
 <h4>Fossil SCM</h4>
 <h4>網際伺服器:</h4>
 <p style="padding-left: 30px;">Windows: fossil server C:\pj2022\repo\pj2022.fossil --port 9000 --https</p>
@@ -59,7 +58,7 @@ CALLBACK_URL = flask_forum
 <p style="padding-left: 60px;"><a href="https://pme.eng.nfu.edu.tw:8443">https://pme.eng.nfu.edu.tw:8443</a></p>
 <h4>Authorised redirect URIs</h4>
 <p style="padding-left: 60px;"><a href="https://pme.eng.nfu.edu.tw:8443/login/google/">https://pme.eng.nfu.edu.tw:8443/login/google/</a></p>
-<h1>GW</h1>
+<h2>GW</h2>
 <p>Google Workspace 應用:</p>
 <p><a href="https://edu.google.com/intl/ALL_tw/workspace-for-education/editions/overview/">https://edu.google.com/intl/ALL_tw/workspace-for-education/editions/overview/</a> </p>
 <p>使用 Python + Flask 建立一個網頁介面，讓管理員透過網頁表單自動在 Google Workspace（前 G Suite）中建立新的 email address（即新增用戶）。<br/><br/>必備條件:<br/><br/>1. Google Workspace 管理員權限：你必須擁有管理員帳號才能新增使用者。<br/>2. Google Cloud Platform 專案：你需要在 GCP 建立一個專案並啟用 [Admin SDK API](https://console.developers.google.com/apis/library/admin.googleapis.com)。<br/>3. 建立服務帳戶（Service Account）並授權 Domain-wide Delegation：這樣 Flask 應用就能以管理員身分進行操作。<br/>4. 下載服務帳戶金鑰（JSON）：Flask 會用這個來驗證。<br/>5. 設定 Google Workspace 的管理員 Email：Flask 會用於 impersonate。<br/><br/>安裝模組:</p>
@@ -121,15 +120,17 @@ def create_google_user(email, password, first_name, last_name):
 
 if __name__ == '__main__':
     app.run(debug=True)</pre>
-<p><br/>注意事項:<br/><br/>1. 服務帳戶要開啟「網域範圍授權」（Domain-wide Delegation），管理員要在 Google Workspace 控制台授權該服務帳戶操作指定的範圍。<br/>3. 密碼建議強度：可以加強密碼生成與驗證。<br/>4. 部署建議：請勿將服務帳戶金鑰暴露於公開網路。<br/>5. 安全性：建議加入認證機制，避免未授權使用。</p>
-<h1>Reeborg</h1>
+<p><br/>注意事項:<br/><br/>1. 服務帳戶要開啟「網域範圍授權」（Domain-wide Delegation），管理員要在 Google Workspace 控制台授權該服務帳戶操作指定的範圍。<br/>3. 密碼建議強度：可以加強密碼生成與驗證。<br/>4. 部署建議：請勿將服務帳戶金鑰暴露於公開網路。<br/>5. 安全性：建議加入認證機制，避免未授權使用。</p><h1>Webots</h1>
+<p><a href="https://github.com/cyberbotics/webots">https://github.com/cyberbotics/webots</a> </p>
+<p><a href="https://github.com/cyberbotics/webots/discussions">https://github.com/cyberbotics/webots/discussions</a> </p>
+<p><a href="https://cyberbotics.com/">https://cyberbotics.com/</a> </p><h1>FossilSCM</h1>
+<p><a href="https://fossil-scm.org">https://fossil-scm.org</a> </p><h1>Reeborg</h1>
 <p><a href="https://eng.nfu.edu.tw/reeborg">https://eng.nfu.edu.tw/reeborg</a> </p>
 <p>假如利用相對路徑呼叫 URL 變數值:</p>
 <p>以下為單數行面向北收成後，雙數行向南收成。</p>
 <p><a href="https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1.py">https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1.py</a> </p>
 <p>以下則為東西方向收成。</p>
-<p><a href="https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1_east_west.py">https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1_east_west.py </a> </p>
-<h1>NX2312</h1>
+<p><a href="https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1_east_west.py">https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1_east_west.py </a> </p><h1>NX2312</h1>
 <p>NXOpen 範例: <a href="https://github.com/mdecycu/nxopen">https://github.com/mdecycu/nxopen</a> </p>
 <p>截至 2024 年 6 月，Siemens NX（Siemens Digital Industries Software 的旗艦 CAD/CAM/CAE 解決方案）尚未正式宣布其產品將「全部」轉為 SaaS（Software as a Service，雲端服務）模式。以下是現況與未來趨勢的分析：</p>
 <h4>現況說明</h4>
