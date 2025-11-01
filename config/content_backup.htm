@@ -927,13 +927,13 @@ doc["aitetris"].bind("click", aitetris.do)
 <!-- editor2 結束 --><hr/>
 <h1>Linux</h1>
 <p>舊電腦替換 Windows 10 操作系統，<a href="https://linuxmint.com/">Linuxmint</a> 是其中ㄧ個不錯的選項。</p>
-<p>Netplan 網路設定：</p>
+<p><span style="background-color: #ffff00;">Netplan 網路設定</span>：</p>
 <p style="padding-left: 30px;">先利用 ifconfig 查詢網卡代號後，選擇已經連線的網卡進行設定：</p>
 <p style="padding-left: 30px;">YAML 最上層為 network, 第二層為 ethernets 與 version, 第三層為網卡代號，第四層則為 addresses, routes 以及 nameservers。</p>
 <p style="padding-left: 30px;">/etc/netplan 中的 yaml 設定檔：</p>
 <p style="padding-left: 60px;">network:<br/>  ethernets:<br/>    yourNICname:<br/>      addresses:<br/>        - 2001:yourIPv6 Address/64<br/>      routes:<br/>        - to: default <br/>          via: 2001:yourIPv6 gateway<br/>      nameservers:<br/>        addresses:<br/>          - 2001:yourDNServer<br/>  version: 2</p>
 <p style="padding-left: 30px;">設定完成後，利用 sudo netplan apply 讓設定生效。</p>
-<p>Remote Desktop 遠端連線：</p>
+<p><span style="background-color: #ffff00;">Remote Desktop 遠端連線</span>：</p>
 <p style="padding-left: 30px;">原生的 Linuxmint 希望利用 remote desktop client 連線，必須安裝 xrdp 以及 xorgxrdp：</p>
 <p style="padding-left: 60px;">sudo apt update</p>
 <p style="padding-left: 60px;">sudo apt install xrdp xorgxrdp</p>
@@ -943,7 +943,7 @@ doc["aitetris"].bind("click", aitetris.do)
 <p style="padding-left: 60px;">Acquire::http::Proxy "http://proxy-server:port";<br/>Acquire::https::Proxy "http://proxy-server:port";</p>
 <p style="padding-left: 30px;">假如 proxy server 的使用需要帳號密碼：</p>
 <p style="padding-left: 60px;">Acquire::http::Proxy "http://username:password@proxy-server:port";<br/>Acquire::https::Proxy "http://username:password@proxy-server:port";</p>
-<p>Python 使用：</p>
+<p><span style="background-color: #ffff00;">Python 使用</span>：</p>
 <p style="padding-left: 30px;">在 Linuxmint 中使用 Python3, 一定要使用 venv 避免改變操作系統中 Python3 所安裝的模組版本。</p>
 <p style="padding-left: 30px;">先安裝對應版本的 venv:</p>
 <p style="padding-left: 60px;">sudo apt install python3.12-venv</p>
@@ -960,13 +960,28 @@ doc["aitetris"].bind("click", aitetris.do)
 <p style="padding-left: 30px;">設定 token 後, cd 至 eng 目錄, 將倉儲中的 cms 設定為可以執行：</p>
 <p style="padding-left: 60px;">chmod u+x cms</p>
 <p style="padding-left: 30px;">最後再以 ./cms 開啟動態編輯環境進行改版。</p>
-<p>注音系統：</p>
+<p><span style="background-color: #ffff00;">注音系統</span>：</p>
 <p style="padding-left: 30px;">sudo apt install ibus ibus-chewing</p>
 <p style="padding-left: 30px;">ibus-setup</p>
 <p style="padding-left: 30px;">ibus restart</p>
-<p>文字編輯器：</p>
+<p><span style="background-color: #ffff00;">文字編輯器</span>：</p>
 <p style="padding-left: 30px;">sudo apt install scite</p>
-<p style="padding-left: 30px;"></p>
-<p></p>
+<h1>Bind</h1>
+<p>Bind Documentation: <a href="https://kb.isc.org/docs/aa-01031">https://kb.isc.org/docs/aa-01031</a> </p>
+<p>Bind DNS 雲端同步設定: <a href="https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf">https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf</a> (<a href="/downloads/dns2.pdf">dns2.pdf</a>)</p>
+<p>DNS Server 的安裝與設定: <a href="https://www2.yocjh.kh.edu.tw/yuan/dns.pdf">https://www2.yocjh.kh.edu.tw/yuan/dns.pdf</a> (<a href="/downloads/dns.pdf">dns.pdf</a>)</p>
+<p><a href="/downloads/Bind9 管理員參考手冊.pdf">Bind9 管理員參考手冊.pdf</a></p>
+<p><a href="/downloads/DNS教育訓練.pdf">DNS教育訓練.pdf</a></p>
+<p><a href="/downloads/DNS教育訓練計畫.pdf">DNS教育訓練計畫.pdf</a></p>
+<p><a href="/downloads/IPv6 升級實作技術手冊.pdf">IPv6 升級實作技術手冊.pdf</a></p><h1>Squid</h1>
+<p><a href="https://www.squid-cache.org/">https://www.squid-cache.org/</a> </p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false"></pre>
+<p>代理伺服器<br/><br/>代理伺服器是位於用戶端和目標伺服器之間的電腦系統。當客戶端向目標伺服器發起資源請求時，代理伺服器會介入連線，並向目標伺服器發出請求。收到回應後，代理伺服器會將其傳回給用戶端。</p>
+<p>在進階版本中，代理伺服器可以根據各種規則過濾請求，並且可能僅允許在請求符合可用規則的情況下進行通訊。這些規則通常是基於客戶端或目標伺服器的 IP 位址、協定、網頁文件的內容類型、網頁內容類型等。</p>
+<p>代理伺服器的功能非常多樣，可以用來提高效能、增強安全性以及進行流量管理等。以下是各項功能的說明：</p>
+<p><br/>一、降低頻寬使用量<br/><br/>代理伺服器透過快取（Caching）技術來減少對外部伺服器的請求，從而降低頻寬消耗。當用戶訪問某個網頁或資源時，代理伺服器會將該資源保存在本地快取中。如果其他用戶需要相同的資源，代理伺服器就可以直接從快取中提供，而不需要再次向外部伺服器請求。這樣一來，可以有效減少網絡流量並提高使用效率。<br/><br/>二、透過快取網頁文件來縮短頁面載入時間，進而提升使用者瀏覽體驗<br/><br/>快取不僅能夠降低頻寬消耗，還能顯著提升頁面載入速度。當用戶請求某個已經被快取的網頁時，代理伺服器會直接提供快取的版本，避免再次下載資源。這樣可以大幅減少頁面載入時間，特別是在網路延遲較高或帶寬較低的情況下，能顯著改善用戶的瀏覽體驗。<br/><br/>三、強制執行網路存取策略<br/><br/>代理伺服器可以用來強制執行公司或組織的網絡使用政策。例如，代理伺服器可以控制哪些網站可以訪問，哪些網站被阻擋，或設置網路使用的時間限制。這在企業或學校等環境中尤為重要，能夠確保員工或學生只訪問工作相關或學習相關的網站，防止不當使用網絡資源。<br/><br/>四、監控使用者流量或報告單一使用者或使用者群組的網路使用情況<br/><br/>代理伺服器可作為監控和審計的工具。它能夠追蹤每個用戶或用戶群組的網路活動，例如哪些網站被訪問、何時訪問以及訪問的頻率等。這些數據可以用於分析網絡使用模式，發現潛在的問題（如不當使用），以及生成有關使用情況的報告，以便管理員進行管理和調整。</p>
+<p><br/>五、透過不將用戶電腦直接暴露於互聯網上來增強用戶隱私<br/><br/>代理伺服器可以隱藏用戶的真實 IP 地址，通過代理伺服器的 IP 地址來訪問外部網站。這樣，用戶的身份和位置信息將無法直接被目標伺服器獲得，有效保護用戶隱私。此外，這還能避免一些網絡攻擊（如 DDoS 攻擊）直接針對用戶端。<br/><br/>六、在不同的 Web 伺服器之間分配負載，以減輕單一伺服器的負載<br/><br/>負載均衡是一個常見的代理伺服器用途。代理伺服器可以根據預設的負載均衡策略（如輪詢、最少連接等）將流量分配到多個 Web 伺服器。這樣可以避免單一伺服器過載，確保服務的高可用性和性能，並且對用戶而言，網站的響應速度和穩定性也會得到提升。<br/><br/>七、提升效能較差的 Web 伺服器的效能<br/><br/>即使是效能較差的 Web 伺服器，也能通過代理伺服器進行優化。代理伺服器可以將經常訪問的內容進行快取，減少 Web 伺服器的負擔，並提升其處理請求的能力。這樣，即使後端伺服器的性能較差，用戶也能夠獲得更好的使用體驗。</p>
+<p>八、使用整合的病毒/惡意軟體偵測系統過濾請求或回應<br/><br/>一些代理伺服器內建有防病毒和惡意軟體掃描功能，當用戶發送請求或伺服器返回數據時，代理伺服器會檢查內容是否包含病毒、木馬、間諜軟體或其他類型的惡意程式。這能有效地阻止不安全的網站或不良資源進入用戶端，提高網絡安全性。<br/><br/>九、在多個網際網路連線之間平衡網路流量<br/><br/>當企業或組織擁有多條網際網路連線時，代理伺服器可以在這些連線之間進行流量平衡。這樣可以確保即使某一條線路擁塞或發生故障，其他線路可以繼續承擔流量，從而提升網絡的可靠性和穩定性。</p>
+<p>十、在區域網路內中繼流量<br/><br/>代理伺服器也可以用來在區域網路（LAN）內部中繼流量，將內部用戶的請求轉發給外部網絡。這對於需要訪問外部網站或服務的內部用戶來說，可以提供更好的流量管理、監控及安全保障。通過代理伺服器，內部網絡可以有效集中管理和過濾外部流量，減少安全風險。<br/><br/></p>
 <p></p>
 <p></p>
