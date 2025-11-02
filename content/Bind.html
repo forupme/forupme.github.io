@@ -149,7 +149,76 @@ img.add_border {
 <p><a href="./../downloads/Bind9 管理員參考手冊.pdf">Bind9 管理員參考手冊.pdf</a></p>
 <p><a href="./../downloads/DNS教育訓練.pdf">DNS教育訓練.pdf</a></p>
 <p><a href="./../downloads/DNS教育訓練計畫.pdf">DNS教育訓練計畫.pdf</a></p>
-<p><a href="./../downloads/IPv6 升級實作技術手冊.pdf">IPv6 升級實作技術手冊.pdf</a></p><br />Linux << <a href='Linux.html'>Previous</a> <a href='Squid.html'>Next</a> >> Squid</div>
+<p><a href="./../downloads/IPv6 升級實作技術手冊.pdf">IPv6 升級實作技術手冊.pdf</a></p>
+<hr/>
+<p>rocket.nfu.edu.tw DNS 伺服器設定:</p>
+<p>從 /etc/bind/named.conf.local 檔案設定開始:</p>
+<p style="padding-left: 30px;">// 正向區域設定：rocket.nfu.edu.tw<br/>zone "rocket.nfu.edu.tw" {<br/>    type master;<br/>    file "/etc/bind/db.rocket";  // 此處記錄檔需要包含正向 IPv4 和 IPv6 記錄<br/>    also-notify { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-transfer { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-update { none; };<br/>    allow-query { any; };<br/>};<br/><br/>// 反向區域設定：XX.XXX.140.in-addr.arpa<br/>zone "XX.XXX.140.in-addr.arpa" {<br/>    type master;<br/>    file "/etc/bind/db.XX";  // 此檔案包含反向 IPv4 記錄<br/>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv4 位址; };<br/>    allow-query { any; };<br/>};<br/><br/>// 反向區域設定：反向查詢區域 (IPv6)<br/>zone "8.b.d.0.1.0.0.0.2.ip6.arpa" {<br/>    type master;<br/>    file "/etc/bind/db.8.b.d.0.1.0.0.0.2";  // 此檔案包含反向 IPv6 記錄<br/>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv6 位址; };<br/>    allow-query { any; };<br/>};</p>
+<hr/>
+<p>named.conf.local 設定是 BIND (Berkeley Internet Name Domain) DNS 伺服器的配置檔案，定義了三個 DNS 區域（zone），分別是主域名區域（正向區域）、IPv4反向區域以及 IPv6 反向區域。<br/><br/>第一個區域設定：zone "rocket.nfu.edu.tw"</p>
+<p style="padding-left: 30px;">zone "rocket.nfu.edu.tw"：</p>
+<p style="padding-left: 60px;">這是正向區域的名稱設定，即 rocket.nfu.edu.tw 這個域名的 DNS 記錄配置。當有人查詢這個域名時，DNS 伺服器會使用此區域文件來進行解析。</p>
+<p style="padding-left: 30px;">type master;：</p>
+<p style="padding-left: 60px;">設定此區域為 "master"（主區域）。這意味著該 DNS 伺服器負責維護該區域的主記錄，並且管理該區域中的所有 DNS 記錄。</p>
+<p style="padding-left: 30px;">file "/etc/bind/db.rocket";：</p>
+<p style="padding-left: 60px;">指定正向區域的資料檔案位置。該檔案 /etc/bind/db.rocket 應包含該區域的所有 DNS 記錄（例如 A 記錄和 AAAA 記錄）。</p>
+<p style="padding-left: 30px;">also-notify { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };：</p>
+<p style="padding-left: 60px;">配置 DNS 伺服器在該區域資料更新後，會通知一個或多個備援 DNS 伺服器。此處需要填寫第二台 DNS 伺服器的 IPv4 和 IPv6 地址。當主伺服器更新區域記錄（例如，修改 A 記錄或 AAAA 記錄）時，會將更新通知發送到指定的備援伺服器。</p>
+<p style="padding-left: 30px;">allow-transfer { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };：</p>
+<p style="padding-left: 60px;">這條規則控制哪些 DNS 伺服器可以獲取該區域的資料副本（即進行區域轉移）。同樣的，這裡需要填寫第二台 DNS 伺服器的 IPv4 和 IPv6 位址。這樣當需要進行資料同步時，這些伺服器會有權限進行資料下載。</p>
+<p style="padding-left: 30px;">allow-update { none; };：</p>
+<p style="padding-left: 60px;">這條規則禁止外部對該區域的更新操作，即外部主機無法通過動態 DNS 更新或發送其他更新請求來修改該區域的 DNS 記錄。none 表示不允許任何更新。</p>
+<p style="padding-left: 30px;">allow-query { any; };：</p>
+<p style="padding-left: 60px;">設定該區域的查詢規則。any 表示該區域的 DNS 記錄對所有來源的查詢都是開放的，無論查詢者來自內部網絡還是外部網絡。</p>
+<hr/>
+<p>第二個區域設定：zone "XX.XXX.140.in-addr.arpa"</p>
+<p>zone "XX.XXX.140.in-addr.arpa":</p>
+<p style="padding-left: 30px;">這是定義了反向 DNS 區域（reverse DNS zone）XX.XXX.140.in-addr.arpa。反向查詢區域是用來將 IP 地址解析回對應的域名。這裡的 XX.XXX.140 是某個特定網段的反向查詢區域。反向區域是用來將 IP 地址映射回域名的區域，這裡假設你有一個 IP 範圍 192.168.140.x，因此反向查詢區域的名稱就是 140.168.192.in-addr.arpa，這是為了將 IPv4 地址轉換回主機名</p>
+<p>type master;:</p>
+<p style="padding-left: 30px;">和第一個區域一樣，這裡設定為 master，表示這是反向查詢區域的主區域。</p>
+<p>file "/etc/bind/db.XX";:</p>
+<p style="padding-left: 30px;">這是反向區域的資料檔案，通常會包含 PTR 記錄，這些記錄將 IP 地址映射到域名。</p>
+<p>allow-update { none; };:</p>
+<p style="padding-left: 30px;">與第一個區域設定相同，這也表明該區域不允許動態更新。</p>
+<p>notify yes;:</p>
+<p style="padding-left: 30px;">這行設置 NOTIFY 機制為啟用，即當區域資料有變動時，會通知其他 DNS 伺服器（包括二級 DNS 伺服器）同步更新。</p>
+<p>also-notify { 填入第二台 dns IP 位址; };:</p>
+<p style="padding-left: 30px;">和第一個區域設定一樣，這裡指定了當區域資料變更時，會通知第二台 DNS 伺服器。</p>
+<p>allow-query { any; };:</p>
+<p style="padding-left: 30px;">這行允許任何 IP 位址進行查詢，無論是正向查詢還是反向查詢。</p>
+<hr/>
+<p>第三個反向區域設定：8.b.d.0.1.0.0.0.2.ip6.arpa</p>
+<p>這是反向區域的名稱。反向區域是用來將 IP 地址映射回域名的區域，這裡假設你有一個 IP 範圍 192.168.140.x，因此反向查詢區域的名稱就是 140.168.192.in-addr.arpa，這是為了將 IPv4 地址轉換回主機名。</p>
+<p>zone "8.b.d.0.1.0.0.0.2.ip6.arpa"：</p>
+<p style="padding-left: 30px;">這是 IPv6 反向區域的名稱。類似於 IPv4 反向查詢，IPv6 反向查詢區域的名稱是由 IPv6 地址倒序組成的，並以 ip6.arpa 結尾。此處 8.b.d.0.1.0.0.0.2.ip6.arpa 表示處理 2001:db8::8 這樣的 IPv6 地址的反向查詢。</p>
+<p>type master;：</p>
+<p style="padding-left: 30px;">設定此區域為 "master"（主區域）。這意味著該 DNS 伺服器是該反向區域的權威伺服器。</p>
+<p>file "/etc/bind/db.8.b.d.0.1.0.0.0.2";：</p>
+<p style="padding-left: 30px;">指定 IPv6 反向區域的資料檔案位置。該檔案應該包含反向查詢的 PTR 記錄，這些記錄將 IPv6 地址映射回主機名。</p>
+<p>allow-update { none; };：</p>
+<p style="padding-left: 30px;">禁止外部對此區域進行動態更新，即外部無法修改 IPv6 反向查詢記錄。</p>
+<p>notify yes;：</p>
+<p style="padding-left: 30px;">啟用通知功能，表示當該區域的記錄變更時，DNS 伺服器將會通知其他伺服器。這是為了確保主伺服器的更新能夠快速同步到其他 DNS 伺服器。</p>
+<p>also-notify { 填入第二台 dns IPv6 位址; };：</p>
+<p style="padding-left: 30px;">置備援 DNS 伺服器的 IPv6 地址，在主伺服器資料更新後會通知這些伺服器。</p>
+<p>allow-query { any; };：</p>
+<p style="padding-left: 30px;">設定反向區域的查詢規則，any 表示允許所有來源的查詢。</p>
+<hr/>
+<p>db.rocket 範例（正向區域，包含 IPv4 和 IPv6 記錄）</p>
+<p style="padding-left: 30px;">$TTL 86400<br/>@   IN  SOA ns1.rocket.nfu.edu.tw. admin.rocket.nfu.edu.tw. (<br/>        2025110201 ; Serial<br/>        86400      ; Refresh<br/>        7200       ; Retry<br/>        3600000    ; Expire<br/>        86400 )    ; Minimum TTL<br/><br/>; 設定名稱伺服器 (NS) 記錄<br/>    IN  NS   ns1.rocket.nfu.edu.tw.<br/>    IN  NS   ns2.rocket.nfu.edu.tw.<br/><br/>; 設定正向 IPv4 (A) 記錄<br/>ns1 IN  A    192.168.140.100<br/>ns2 IN  A    192.168.140.101<br/>www IN  A    192.168.140.200<br/><br/>; 設定正向 IPv6 (AAAA) 記錄<br/>ns1 IN  AAAA 2001:db8::100<br/>ns2 IN  AAAA 2001:db8::101<br/>www IN  AAAA 2001:db8::200<br/><br/>; 可選的其他主機 A 和 AAAA 記錄<br/>mail IN A    192.168.140.50<br/>ftp  IN A    192.168.140.51</p>
+<p>db.rocket 設定說明:</p>
+<p style="padding-left: 30px;">@ 代表該區域的根域，即 rocket.nfu.edu.tw。<br/><br/>SOA (Start of Authority) 記錄定義了該區域的基本資訊，包括主 DNS 伺服器、聯絡電子郵件、序號、刷新時間等。<br/><br/>NS (Name Server) 記錄定義了該域的名稱伺服器，這裡指定了 ns1.rocket.nfu.edu.tw 和 ns2.rocket.nfu.edu.tw。<br/><br/>A (Address) 記錄指定了主機名稱對應的 IPv4 地址。<br/><br/>AAAA (IPv6 Address) 記錄指定了主機名稱對應的 IPv6 地址。</p>
+<hr/>
+<p>db.XX 範例（反向區域，IPv4 反向查詢）<br/><br/>反向查詢區域是為了將 IPv4 地址映射回主機名（PTR 記錄）。假設你有 192.168.140.0/24 這個網段的 IP 地址，你會為這些地址創建反向區域記錄。</p>
+<p style="padding-left: 30px;">$TTL 86400<br/>@   IN  SOA ns1.rocket.nfu.edu.tw. admin.rocket.nfu.edu.tw. (<br/>        2025110201 ; Serial<br/>        86400      ; Refresh<br/>        7200       ; Retry<br/>        3600000    ; Expire<br/>        86400 )    ; Minimum TTL<br/><br/>; 設定名稱伺服器 (NS) 記錄<br/>    IN  NS   ns1.rocket.nfu.edu.tw.<br/>    IN  NS   ns2.rocket.nfu.edu.tw.<br/><br/>; 反向查詢 IPv4 記錄 (PTR 記錄)<br/>100   IN  PTR ns1.rocket.nfu.edu.tw.<br/>101   IN  PTR ns2.rocket.nfu.edu.tw.<br/>200   IN  PTR www.rocket.nfu.edu.tw.<br/>50    IN  PTR mail.rocket.nfu.edu.tw.<br/>51    IN  PTR ftp.rocket.nfu.edu.tw.</p>
+<hr/>
+<p>db.XX 設定說明:</p>
+<p style="padding-left: 30px;">反向查詢區域的名稱是以 IP 地址的逆序進行命名的，並且使用 in-addr.arpa 域。這裡假設你有 192.168.140.0/24 範圍的 IP 地址，因此反向查詢區域的名稱是 140.168.192.in-addr.arpa。<br/><br/>PTR 記錄將 IP 地址反向解析為域名。例如，192.168.140.100 的反向查詢會映射到 ns1.rocket.nfu.edu.tw。</p>
+<hr/>
+<p>修改設定說明:</p>
+<p style="padding-left: 30px;">序號（Serial Number）：2025110201 是一個用來標示該區域檔案版本的序號，每次你修改區域檔案時，應該增加這個序號。</p>
+<p style="padding-left: 30px;">TTL（Time-to-Live）：指定 DNS 記錄的緩存時間。這裡設為 86400 秒（24 小時）。</p>
+<p style="padding-left: 30px;">PTR (PoinTeR) 記錄：這是將 IP 地址反向查詢回對應的域名。這些記錄應該根據你的實際 IP 地址範圍進行配置。<br/><br/></p><br />Linux << <a href='Linux.html'>Previous</a> <a href='Squid.html'>Next</a> >> Squid</div>
         
     <!-- footer -->
       <div class="container">
