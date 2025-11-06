@@ -2,7 +2,8 @@
 <p>這裡是 ENGroup 網站:</p>
 <p>本網站 UR: <a href="https://eng.nfu.edu.tw">https://eng.nfu.edu.tw</a> </p>
 <p>本網站倉儲: <a href="https://github.com/forupme/forupme.github.io">https://github.com/forupme/forupme.github.io</a></p>
-<p>討論: <a href="https://github.com/forupme/forupme.github.io/discussions">https://github.com/forupme/forupme.github.io/discussions</a> </p><h2>MISC</h2>
+<p>討論: <a href="https://github.com/forupme/forupme.github.io/discussions">https://github.com/forupme/forupme.github.io/discussions</a> </p>
+<h2>MISC</h2>
 <h4>Fossil SCM</h4>
 <h4>網際伺服器:</h4>
 <p style="padding-left: 30px;">Windows: fossil server C:\pj2022\repo\pj2022.fossil --port 9000 --https</p>
@@ -950,7 +951,7 @@ doc["aitetris"].bind("click", aitetris.do)
 <p style="padding-left: 30px;">先安裝對應版本的 venv:</p>
 <p style="padding-left: 60px;">sudo apt install python3.12-venv</p>
 <p style="padding-left: 30px;">接著利用 venv 建立 cmsimde 虛擬環境：</p>
-<p style="padding-left: 60px;">python -m venv cmsimde</p>
+<p style="padding-left: 60px;">python3 -m venv cmsimde</p>
 <p style="padding-left: 30px;">然後切換到 cmsimde 虛擬環境：</p>
 <p style="padding-left: 60px;">source cmsimde/bin/activate</p>
 <p style="padding-left: 30px;">當命令列回應已經進入 cmsimde 虛擬環境後, 著手安裝所需的模組：</p>
@@ -967,7 +968,60 @@ doc["aitetris"].bind("click", aitetris.do)
 <p style="padding-left: 30px;">ibus-setup</p>
 <p style="padding-left: 30px;">ibus restart</p>
 <p><span style="background-color: #ffff00;">文字編輯器</span>：</p>
-<p style="padding-left: 30px;">sudo apt install scite</p><h1>Bind</h1>
+<p style="padding-left: 30px;">sudo apt install scite</p>
+<h2>Lubuntu</h2>
+<p>Letsencrypt: <a href="https://certbot.eff.org/instructions">https://certbot.eff.org/instructions</a> </p>
+<p>add s1.eng.nfu.edu.tw into DNS server</p>
+<p><a href="https://certbot.eff.org/instructions?ws=nginx&amp;os=pip">https://certbot.eff.org/instructions?ws=nginx&amp;os=pip</a></p>
+<p>Get site certificate:</p>
+<p style="padding-left: 30px;">sudo apt update</p>
+<p style="padding-left: 30px;">sudo apt install nginx</p>
+<p style="padding-left: 30px;">sudo apt install python3 python3-dev python3-venv libaugeas-dev gcc</p>
+<p style="padding-left: 30px;">sudo python3 -m venv /opt/certbot/</p>
+<p style="padding-left: 30px;">sudo /opt/certbot/bin/pip install --upgrade pip</p>
+<p style="padding-left: 30px;">sudo /opt/certbot/bin/pip install certbot certbot-nginx</p>
+<p style="padding-left: 30px;">sudo ln -s /opt/certbot/bin/certbot /usr/bin/certbot</p>
+<p style="padding-left: 30px;">sudo certbot certonly --nginx</p>
+<pre style="padding-left: 30px;">echo "0 0,12 * * * root /opt/certbot/bin/python -c 'import random; import time; time.sleep(random.random() * 3600)' &amp;&amp; sudo certbot renew -q" | sudo tee -a /etc/crontab &gt; /dev/null</pre>
+<p>Certificate is saved at: /etc/letsencrypt/live/s1.eng.nfu.edu.tw/fullchain.pem<br/>Key is saved at:         /etc/letsencrypt/live/s1.eng.nfu.edu.tw/privkey.pem</p>
+<p>Nginx:</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">server {
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	# Add index.php to the list if you are using PHP
+	index index.html;
+
+	server_name s1.eng.nfu.edu.tw;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+	
+	# ~/public_html for every user - Lubuntu style
+	location ~ ^/~([^/]+)(/.*)?$ {
+	    alias /home/$1/public_html$2;
+	    autoindex on;
+
+	    # Block hidden files/folders (.git, .htaccess, etc.)
+	    location ~ /\.[^/]*$ { deny all; }
+	}
+}
+
+</pre>
+<p>sudo chmod 711 /home/*</p>
+<p>Result: <a href="http://s1.eng.nfu.edu.tw/~mde">http://s1.eng.nfu.edu.tw/~mde</a></p>
+<p>stunnel and waitress:</p>
+<p>stunnel.conf</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[https]
+accept = s1.eng.nfu.edu.tw:443
+connect = 127.0.0.1:9443
+cert = /etc/stunnel/fullchain.pem
+key = /etc/stunnel/privkey.pem
+TIMEOUTClose = 0</pre>
+<p></p>
+<h1>Bind</h1>
 <p>Bind Documentation: <a href="https://kb.isc.org/docs/aa-01031">https://kb.isc.org/docs/aa-01031</a> </p>
 <p>Bind DNS 雲端同步設定: <a href="https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf">https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf</a> (<a href="/downloads/dns2.pdf">dns2.pdf</a>)</p>
 <p>DNS Server 的安裝與設定: <a href="https://www2.yocjh.kh.edu.tw/yuan/dns.pdf">https://www2.yocjh.kh.edu.tw/yuan/dns.pdf</a> (<a href="/downloads/dns.pdf">dns.pdf</a>)</p>
@@ -1043,7 +1097,8 @@ doc["aitetris"].bind("click", aitetris.do)
 <p>修改設定說明:</p>
 <p style="padding-left: 30px;">序號（Serial Number）：2025110201 是一個用來標示該區域檔案版本的序號，每次你修改區域檔案時，應該增加這個序號。</p>
 <p style="padding-left: 30px;">TTL（Time-to-Live）：指定 DNS 記錄的緩存時間。這裡設為 86400 秒（24 小時）。</p>
-<p style="padding-left: 30px;">PTR (PoinTeR) 記錄：這是將 IP 地址反向查詢回對應的域名。這些記錄應該根據你的實際 IP 地址範圍進行配置。<br/><br/></p><h1>Squid</h1>
+<p style="padding-left: 30px;">PTR (PoinTeR) 記錄：這是將 IP 地址反向查詢回對應的域名。這些記錄應該根據你的實際 IP 地址範圍進行配置。<br/><br/></p>
+<h1>Squid</h1>
 <p><a href="https://www.squid-cache.org/">https://www.squid-cache.org/</a> </p>
 <p><a href="/downloads/proxy基本設定.pdf">proxy基本設定.pdf</a></p>
 <p>代理伺服器<br/><br/>代理伺服器是位於用戶端和目標伺服器之間的電腦系統。當客戶端向目標伺服器發起資源請求時，代理伺服器會介入連線，並向目標伺服器發出請求。收到回應後，代理伺服器會將其傳回給用戶端。</p>
@@ -1052,12 +1107,87 @@ doc["aitetris"].bind("click", aitetris.do)
 <p><br/>一、降低頻寬使用量<br/><br/>代理伺服器透過快取（Caching）技術來減少對外部伺服器的請求，從而降低頻寬消耗。當用戶訪問某個網頁或資源時，代理伺服器會將該資源保存在本地快取中。如果其他用戶需要相同的資源，代理伺服器就可以直接從快取中提供，而不需要再次向外部伺服器請求。這樣一來，可以有效減少網絡流量並提高使用效率。<br/><br/>二、透過快取網頁文件來縮短頁面載入時間，進而提升使用者瀏覽體驗<br/><br/>快取不僅能夠降低頻寬消耗，還能顯著提升頁面載入速度。當用戶請求某個已經被快取的網頁時，代理伺服器會直接提供快取的版本，避免再次下載資源。這樣可以大幅減少頁面載入時間，特別是在網路延遲較高或帶寬較低的情況下，能顯著改善用戶的瀏覽體驗。<br/><br/>三、強制執行網路存取策略<br/><br/>代理伺服器可以用來強制執行公司或組織的網絡使用政策。例如，代理伺服器可以控制哪些網站可以訪問，哪些網站被阻擋，或設置網路使用的時間限制。這在企業或學校等環境中尤為重要，能夠確保員工或學生只訪問工作相關或學習相關的網站，防止不當使用網絡資源。<br/><br/>四、監控使用者流量或報告單一使用者或使用者群組的網路使用情況<br/><br/>代理伺服器可作為監控和審計的工具。它能夠追蹤每個用戶或用戶群組的網路活動，例如哪些網站被訪問、何時訪問以及訪問的頻率等。這些數據可以用於分析網絡使用模式，發現潛在的問題（如不當使用），以及生成有關使用情況的報告，以便管理員進行管理和調整。</p>
 <p><br/>五、透過不將用戶電腦直接暴露於互聯網上來增強用戶隱私<br/><br/>代理伺服器可以隱藏用戶的真實 IP 地址，通過代理伺服器的 IP 地址來訪問外部網站。這樣，用戶的身份和位置信息將無法直接被目標伺服器獲得，有效保護用戶隱私。此外，這還能避免一些網絡攻擊（如 DDoS 攻擊）直接針對用戶端。<br/><br/>六、在不同的 Web 伺服器之間分配負載，以減輕單一伺服器的負載<br/><br/>負載均衡是一個常見的代理伺服器用途。代理伺服器可以根據預設的負載均衡策略（如輪詢、最少連接等）將流量分配到多個 Web 伺服器。這樣可以避免單一伺服器過載，確保服務的高可用性和性能，並且對用戶而言，網站的響應速度和穩定性也會得到提升。<br/><br/>七、提升效能較差的 Web 伺服器的效能<br/><br/>即使是效能較差的 Web 伺服器，也能通過代理伺服器進行優化。代理伺服器可以將經常訪問的內容進行快取，減少 Web 伺服器的負擔，並提升其處理請求的能力。這樣，即使後端伺服器的性能較差，用戶也能夠獲得更好的使用體驗。</p>
 <p>八、使用整合的病毒/惡意軟體偵測系統過濾請求或回應<br/><br/>一些代理伺服器內建有防病毒和惡意軟體掃描功能，當用戶發送請求或伺服器返回數據時，代理伺服器會檢查內容是否包含病毒、木馬、間諜軟體或其他類型的惡意程式。這能有效地阻止不安全的網站或不良資源進入用戶端，提高網絡安全性。<br/><br/>九、在多個網際網路連線之間平衡網路流量<br/><br/>當企業或組織擁有多條網際網路連線時，代理伺服器可以在這些連線之間進行流量平衡。這樣可以確保即使某一條線路擁塞或發生故障，其他線路可以繼續承擔流量，從而提升網絡的可靠性和穩定性。</p>
-<p>十、在區域網路內中繼流量<br/><br/>代理伺服器也可以用來在區域網路（LAN）內部中繼流量，將內部用戶的請求轉發給外部網絡。這對於需要訪問外部網站或服務的內部用戶來說，可以提供更好的流量管理、監控及安全保障。通過代理伺服器，內部網絡可以有效集中管理和過濾外部流量，減少安全風險。<br/><br/></p><h1>Rocket</h1>
+<p>十、在區域網路內中繼流量<br/><br/>代理伺服器也可以用來在區域網路（LAN）內部中繼流量，將內部用戶的請求轉發給外部網絡。這對於需要訪問外部網站或服務的內部用戶來說，可以提供更好的流量管理、監控及安全保障。通過代理伺服器，內部網絡可以有效集中管理和過濾外部流量，減少安全風險。<br/><br/></p>
+<h1>Rocket</h1>
 <p><a href="https://rocketpy-team.github.io/">https://rocketpy-team.github.io/</a> </p>
 <p><a href="https://github.com/mdecycu/RocketPy">https://github.com/mdecycu/RocketPy</a> </p>
 <p><a href="https://proceedings.scipy.org/articles/majora-212e5952-020">https://proceedings.scipy.org/articles/majora-212e5952-020</a> </p>
 <p><a href="https://openrocket.info/">https://openrocket.info/</a> </p>
 <p><a href="https://www.rocksim.com/">https://www.rocksim.com/</a> </p>
 <p>Rocketpy + Webots</p>
-<p></p>
+<h1>cmsimde</h1>
+<p>在 Debian 類 (例如: Ubuntu、Linuxmint、Lubuntu 等) 如何使用 cmsimde 網際內容管理。</p>
+<p>How to use cmsimde under Debian (Ubuntu, Linuxmint ...):</p>
+<p>首先應該要先查詢當下所使用操作系統所配置的 Python 版本，並隨即配合安裝 venv 模組。</p>
+<p>check Python version: for Ubuntu 22.04 the version of Python is 3.10.11</p>
+<p>install Python venv module:</p>
+<p style="padding-left: 30px;">sudo apt install python3.10-venv</p>
+<p>接著建立 cmsimde Python 虛擬環境:</p>
+<p>create cmsimde venv:</p>
+<p style="padding-left: 30px;">python3 -m venv cmsimde</p>
+<p>接著進入 cmsimde 虛擬環境:</p>
+<p>get into cmsimde venv:</p>
+<p style="padding-left: 30px;">source cmsimde/bin/activate</p>
+<p>在 cmsimde 虛擬環境中安裝執行 cmsimde 網際內容管理系統執行時所需用到的 Python 模組:</p>
+<p>under cmsimde venv install modules:</p>
+<p style="padding-left: 30px;">(cmsimde) $ pip list</p>
+<p style="padding-left: 30px;">(cmsimde) $ pip install flask flask_cors bs4 lxml pelican markdown</p>
+<p style="padding-left: 30px;">(cmsimde) $ pip list</p>
+<p>cmsimde 虛擬環境使用結束，利用 deactivate 指令退出:</p>
+<p>deactivate cmsimde venv</p>
+<p style="padding-left: 30px;">(cmsimde) $ deactivate</p>
+<hr/>
+<p>cmsimde 網際內容管理系統的啟動分為開發模式 (development) 與生產模式 (production):</p>
+<p>開發模式: 在 Windows, 使用 cms.bat 或在 Linux 使用 ./cms</p>
+<p>生產模式(以較高的運行效率部署):</p>
+<p style="padding-left: 30px;">中小型應用 WSGI (每秒約 350 ~ 500 請求): python waitress_server.py</p>
+<p style="padding-left: 30px;">中型應用 WSGI Gunicorn (Green Unicorn) (每秒約 800 ~ 1200 請求): python gunicorn_server.py</p>
+<p style="padding-left: 30px;">大型應用 uWSGI (每秒約 1500 ~2500 請求): python uwsgi_server.py</p>
+<p>waitress_server.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># pip install waitress
+from waitress import serve
+from cmsimde import flaskapp
+# 8xxxx is for Stunnel accept port
+# 9xxxx is for localhost internal port
+serve(flaskapp.app, listen='127.0.0.1:9443', threads=8)
+</pre>
+<p>gunicorn_server.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># pip install gunicorn
+import subprocess
+
+# Gunicorn 啟動命令
+command = [
+    'gunicorn',
+    '-b', '127.0.0.1:9443',  # 內部端口
+    '-w', '4',  # 啟動 4 個工作進程
+    'cmsimde.flaskapp:app'  # 指定 Flask 應用模組的路徑
+]
+
+# 啟動 Gunicorn
+subprocess.run(command)
+</pre>
+<p>uwsgi_server.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># pip install uwsgi
+import subprocess
+
+# uWSGI 啟動命令
+command = [
+    'uwsgi', 
+    '--http', '127.0.0.1:9443',  # uWSGI 綁定的內部端口
+    '--wsgi-file', 'cmsimde/flaskapp.py',  # 指定 Flask 應用的 Python 文件
+    '--callable', 'app',  # 指定 Flask 實例的名稱
+    '--processes', '4',  # 啟動 4 個工作進程
+    '--threads', '2'  # 每個進程啟動 2 個線程
+]
+
+# 啟動 uWSGI
+subprocess.run(command)
+</pre>
+<p>stunnel.conf</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[https]
+accept = server_name:443
+connect = 127.0.0.1:9443
+cert = /etc/stunnel/fullchain.pem
+key = /etc/stunnel/privkey.pem
+TIMEOUTClose = 0</pre>
 <p></p>

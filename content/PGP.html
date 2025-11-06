@@ -142,48 +142,9 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">PGP << <a href='PGP.html'>Previous</a> <a href='Lubuntu.html'>Next</a> >> Lubuntu<br /><h1>Linux</h1>
-<p>舊電腦替換 Windows 10 操作系統，<a href="https://linuxmint.com/">Linuxmint</a> 是其中ㄧ個不錯的選項。</p>
-<p><span style="background-color: #ffff00;">Netplan 網路設定</span>：</p>
-<p style="padding-left: 30px;">先利用 ifconfig 查詢網卡代號後，選擇已經連線的網卡進行設定：</p>
-<p style="padding-left: 30px;">YAML 最上層為 network, 第二層為 ethernets 與 version, 第三層為網卡代號，第四層則為 addresses, routes 以及 nameservers。</p>
-<p style="padding-left: 30px;">/etc/netplan 中的 yaml 設定檔：</p>
-<p style="padding-left: 60px;">network:<br/>  ethernets:<br/>    yourNICname:<br/>      addresses:<br/>        - 2001:yourIPv6 Address/64<br/>      routes:<br/>        - to: default <br/>          via: 2001:yourIPv6 gateway<br/>      nameservers:<br/>        addresses:<br/>          - 2001:yourDNServer<br/>  version: 2</p>
-<p style="padding-left: 30px;">設定完成後，利用 sudo netplan apply 讓設定生效。</p>
-<p><span style="background-color: #ffff00;">Remote Desktop 遠端連線</span>：</p>
-<p style="padding-left: 30px;">原生的 Linuxmint 希望利用 remote desktop client 連線，必須安裝 xrdp 以及 xorgxrdp：</p>
-<p style="padding-left: 60px;">sudo apt update</p>
-<p style="padding-left: 60px;">sudo apt install xrdp xorgxrdp</p>
-<p style="padding-left: 30px;">但是若電腦僅使用 IPv6 網路協定, 必須先針對 apt 設定代理主機，以便連結至只支援 IPv4 的 Linuxmint 套件網站。</p>
-<p style="padding-left: 60px;">sudo vi /etc/apt/apt.conf.d/95proxies</p>
-<p style="padding-left: 30px;">然後加入：</p>
-<p style="padding-left: 60px;">Acquire::http::Proxy "http://proxy-server:port";<br/>Acquire::https::Proxy "http://proxy-server:port";</p>
-<p style="padding-left: 30px;">假如 proxy server 的使用需要帳號密碼：</p>
-<p style="padding-left: 60px;">Acquire::http::Proxy "http://username:password@proxy-server:port";<br/>Acquire::https::Proxy "http://username:password@proxy-server:port";</p>
-<p><span style="background-color: #ffff00;">Python 使用</span>：</p>
-<p style="padding-left: 30px;">在 Linuxmint 中使用 Python3, 一定要使用 venv 避免改變操作系統中 Python3 所安裝的模組版本。</p>
-<p style="padding-left: 30px;">先安裝對應版本的 venv:</p>
-<p style="padding-left: 60px;">sudo apt install python3.12-venv</p>
-<p style="padding-left: 30px;">接著利用 venv 建立 cmsimde 虛擬環境：</p>
-<p style="padding-left: 60px;">python3 -m venv cmsimde</p>
-<p style="padding-left: 30px;">然後切換到 cmsimde 虛擬環境：</p>
-<p style="padding-left: 60px;">source cmsimde/bin/activate</p>
-<p style="padding-left: 30px;">當命令列回應已經進入 cmsimde 虛擬環境後, 著手安裝所需的模組：</p>
-<p style="padding-left: 60px;">pip install flask flask_cors bs4 lxml pelican markdown</p>
-<p style="padding-left: 30px;">若要利用 git 指令, 必須先安裝 git:</p>
-<p style="padding-left: 60px;">sudo apt install git</p>
-<p style="padding-left: 30px;">然後 clone forupme.github.io 倉儲，並選擇用 token 或 SSH 的方式管理網站：</p>
-<p style="padding-left: 60px;">git clone --recurse-submodules <a href="https://github.com/forupme/forupme.github.io">https://github.com/forupme/forupme.github.io</a> eng</p>
-<p style="padding-left: 30px;">設定 token 後, cd 至 eng 目錄, 將倉儲中的 cms 設定為可以執行：</p>
-<p style="padding-left: 60px;">chmod u+x cms</p>
-<p style="padding-left: 30px;">最後再以 ./cms 開啟動態編輯環境進行改版。</p>
-<p><span style="background-color: #ffff00;">注音系統</span>：</p>
-<p style="padding-left: 30px;">sudo apt install ibus ibus-chewing</p>
-<p style="padding-left: 30px;">ibus-setup</p>
-<p style="padding-left: 30px;">ibus restart</p>
-<p><span style="background-color: #ffff00;">文字編輯器</span>：</p>
-<p style="padding-left: 30px;">sudo apt install scite</p>
-<br />PGP << <a href='PGP.html'>Previous</a> <a href='Lubuntu.html'>Next</a> >> Lubuntu</div>
+    <div id="tipue_search_content">Brython << <a href='Brython.html'>Previous</a> <a href='Linux.html'>Next</a> >> Linux<br /><h1>PGP</h1>
+<p><a href="https://www.gpg4win.org/">https://www.gpg4win.org/</a> </p>
+<br />Brython << <a href='Brython.html'>Previous</a> <a href='Linux.html'>Next</a> >> Linux</div>
         
     <!-- footer -->
       <div class="container">
