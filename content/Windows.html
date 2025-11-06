@@ -2,7 +2,7 @@
         <head>
         <title>ENGroup 網站</title>
         <meta charset="utf-8">
-<meta property="head" content="H1">
+<meta property="head" content="H2">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/css/bootstrap.min.css">
@@ -142,14 +142,61 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Squid << <a href='Squid.html'>Previous</a> <a href='cmsimde.html'>Next</a> >> cmsimde<br /><h1>Rocket</h1>
-<p><a href="https://rocketpy-team.github.io/">https://rocketpy-team.github.io/</a> </p>
-<p><a href="https://github.com/mdecycu/RocketPy">https://github.com/mdecycu/RocketPy</a> </p>
-<p><a href="https://proceedings.scipy.org/articles/majora-212e5952-020">https://proceedings.scipy.org/articles/majora-212e5952-020</a> </p>
-<p><a href="https://openrocket.info/">https://openrocket.info/</a> </p>
-<p><a href="https://www.rocksim.com/">https://www.rocksim.com/</a> </p>
-<p>Rocketpy + Webots</p>
-<br />Squid << <a href='Squid.html'>Previous</a> <a href='cmsimde.html'>Next</a> >> cmsimde</div>
+    <div id="tipue_search_content">Lubuntu << <a href='Lubuntu.html'>Previous</a> <a href='Bind.html'>Next</a> >> Bind<br /><h1>Windows</h1>
+<p>nginx 設定為各用戶可以透過 public_html 共用全球資訊網伺服器:</p>
+<p>nginx.conf</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile      on;
+    keepalive_timeout  65;
+
+    server {
+        listen       [::]:80 default_server;
+        server_name  s4.eng.nfu.edu.tw;
+
+        # 主網站根目錄
+        root   C:/nginx-1.28.0/html;
+        index  index.html;
+
+        # user 個人網站
+        location ~ ^/~([^/]+)(/.*)?$ {
+            set $user     $1;
+            set $subpath  $2;
+            if ($subpath = "") { set $subpath "/"; }
+
+            # Windows 可以強制用正斜線
+            set $home  C:/Users/$user/public_html$subpath;
+
+            # 若無 public_html 則傳回 404
+            if (!-d C:/Users/$user/public_html) {
+                return 404;
+            }
+
+            alias $home;
+            autoindex on;
+        }
+
+        # 主要檔案服務
+        location / {
+            try_files $uri $uri/ =404;
+        }
+
+        # 全局禁止 .git、.htaccess 等隱藏檔
+        location ~ /\.(?!well-known).* {
+            deny all;
+            access_log off;
+            log_not_found off;
+        }
+    }
+}</pre>
+<p><a href="http://s4.eng.nfu.edu.tw/~pj2023">http://s4.eng.nfu.edu.tw/~pj2023</a> </p><br />Lubuntu << <a href='Lubuntu.html'>Previous</a> <a href='Bind.html'>Next</a> >> Bind</div>
         
     <!-- footer -->
       <div class="container">

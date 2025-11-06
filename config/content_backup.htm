@@ -1015,13 +1015,66 @@ doc["aitetris"].bind("click", aitetris.do)
 <p>stunnel and waitress:</p>
 <p>stunnel.conf</p>
 <pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[https]
-accept = s1.eng.nfu.edu.tw:443
+accept = server_name:443
 connect = 127.0.0.1:9443
 cert = /etc/stunnel/fullchain.pem
 key = /etc/stunnel/privkey.pem
 TIMEOUTClose = 0</pre>
-<p></p>
-<h1>Bind</h1>
+<p></p><h2>Windows</h2>
+<p>nginx 設定為各用戶可以透過 public_html 共用全球資訊網伺服器:</p>
+<p>nginx.conf</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile      on;
+    keepalive_timeout  65;
+
+    server {
+        listen       [::]:80 default_server;
+        server_name  s4.eng.nfu.edu.tw;
+
+        # 主網站根目錄
+        root   C:/nginx-1.28.0/html;
+        index  index.html;
+
+        # user 個人網站
+        location ~ ^/~([^/]+)(/.*)?$ {
+            set $user     $1;
+            set $subpath  $2;
+            if ($subpath = "") { set $subpath "/"; }
+
+            # Windows 可以強制用正斜線
+            set $home  C:/Users/$user/public_html$subpath;
+
+            # 若無 public_html 則傳回 404
+            if (!-d C:/Users/$user/public_html) {
+                return 404;
+            }
+
+            alias $home;
+            autoindex on;
+        }
+
+        # 主要檔案服務
+        location / {
+            try_files $uri $uri/ =404;
+        }
+
+        # 全局禁止 .git、.htaccess 等隱藏檔
+        location ~ /\.(?!well-known).* {
+            deny all;
+            access_log off;
+            log_not_found off;
+        }
+    }
+}</pre>
+<p></p><h1>Bind</h1>
 <p>Bind Documentation: <a href="https://kb.isc.org/docs/aa-01031">https://kb.isc.org/docs/aa-01031</a> </p>
 <p>Bind DNS 雲端同步設定: <a href="https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf">https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf</a> (<a href="/downloads/dns2.pdf">dns2.pdf</a>)</p>
 <p>DNS Server 的安裝與設定: <a href="https://www2.yocjh.kh.edu.tw/yuan/dns.pdf">https://www2.yocjh.kh.edu.tw/yuan/dns.pdf</a> (<a href="/downloads/dns.pdf">dns.pdf</a>)</p>
@@ -1097,8 +1150,7 @@ TIMEOUTClose = 0</pre>
 <p>修改設定說明:</p>
 <p style="padding-left: 30px;">序號（Serial Number）：2025110201 是一個用來標示該區域檔案版本的序號，每次你修改區域檔案時，應該增加這個序號。</p>
 <p style="padding-left: 30px;">TTL（Time-to-Live）：指定 DNS 記錄的緩存時間。這裡設為 86400 秒（24 小時）。</p>
-<p style="padding-left: 30px;">PTR (PoinTeR) 記錄：這是將 IP 地址反向查詢回對應的域名。這些記錄應該根據你的實際 IP 地址範圍進行配置。<br/><br/></p>
-<h1>Squid</h1>
+<p style="padding-left: 30px;">PTR (PoinTeR) 記錄：這是將 IP 地址反向查詢回對應的域名。這些記錄應該根據你的實際 IP 地址範圍進行配置。<br/><br/></p><h1>Squid</h1>
 <p><a href="https://www.squid-cache.org/">https://www.squid-cache.org/</a> </p>
 <p><a href="/downloads/proxy基本設定.pdf">proxy基本設定.pdf</a></p>
 <p>代理伺服器<br/><br/>代理伺服器是位於用戶端和目標伺服器之間的電腦系統。當客戶端向目標伺服器發起資源請求時，代理伺服器會介入連線，並向目標伺服器發出請求。收到回應後，代理伺服器會將其傳回給用戶端。</p>
