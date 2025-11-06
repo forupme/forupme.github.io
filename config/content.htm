@@ -966,7 +966,58 @@ doc["aitetris"].bind("click", aitetris.do)
 <p style="padding-left: 30px;">ibus restart</p>
 <p><span style="background-color: #ffff00;">文字編輯器</span>：</p>
 <p style="padding-left: 30px;">sudo apt install scite</p>
-<h1>Bind</h1>
+<h2>Lubuntu</h2>
+<p>Letsencrypt: <a href="https://certbot.eff.org/instructions">https://certbot.eff.org/instructions</a> </p>
+<p>add s1.eng.nfu.edu.tw into DNS server</p>
+<p><a href="https://certbot.eff.org/instructions?ws=nginx&amp;os=pip">https://certbot.eff.org/instructions?ws=nginx&amp;os=pip</a></p>
+<p>Get site certificate:</p>
+<p style="padding-left: 30px;">sudo apt update</p>
+<p style="padding-left: 30px;">sudo apt install nginx</p>
+<p style="padding-left: 30px;">sudo apt install python3 python3-dev python3-venv libaugeas-dev gcc</p>
+<p style="padding-left: 30px;">sudo python3 -m venv /opt/certbot/</p>
+<p style="padding-left: 30px;">sudo /opt/certbot/bin/pip install --upgrade pip</p>
+<p style="padding-left: 30px;">sudo /opt/certbot/bin/pip install certbot certbot-nginx</p>
+<p style="padding-left: 30px;">sudo ln -s /opt/certbot/bin/certbot /usr/bin/certbot</p>
+<p style="padding-left: 30px;">sudo certbot certonly --nginx</p>
+<pre style="padding-left: 30px;">echo "0 0,12 * * * root /opt/certbot/bin/python -c 'import random; import time; time.sleep(random.random() * 3600)' &amp;&amp; sudo certbot renew -q" | sudo tee -a /etc/crontab &gt; /dev/null</pre>
+<p>Certificate is saved at: /etc/letsencrypt/live/s1.eng.nfu.edu.tw/fullchain.pem<br/>Key is saved at:         /etc/letsencrypt/live/s1.eng.nfu.edu.tw/privkey.pem</p>
+<p>Nginx:</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">server {
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	# Add index.php to the list if you are using PHP
+	index index.html;
+
+	server_name s1.eng.nfu.edu.tw;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+	
+	# ~/public_html for every user - Lubuntu style
+	location ~ ^/~([^/]+)(/.*)?$ {
+	    alias /home/$1/public_html$2;
+	    autoindex on;
+
+	    # Block hidden files/folders (.git, .htaccess, etc.)
+	    location ~ /\.[^/]*$ { deny all; }
+	}
+}
+
+</pre>
+<p>sudo chmod 711 /home/*</p>
+<p>Result: <a href="http://s1.eng.nfu.edu.tw/~mde">http://s1.eng.nfu.edu.tw/~mde</a></p>
+<p>stunnel and waitress:</p>
+<p>stunnel.conf</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[https]
+accept = s1.eng.nfu.edu.tw:443
+connect = 127.0.0.1:9443
+cert = /etc/stunnel/fullchain.pem
+key = /etc/stunnel/privkey.pem
+TIMEOUTClose = 0</pre>
+<p></p><h1>Bind</h1>
 <p>Bind Documentation: <a href="https://kb.isc.org/docs/aa-01031">https://kb.isc.org/docs/aa-01031</a> </p>
 <p>Bind DNS 雲端同步設定: <a href="https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf">https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf</a> (<a href="/downloads/dns2.pdf">dns2.pdf</a>)</p>
 <p>DNS Server 的安裝與設定: <a href="https://www2.yocjh.kh.edu.tw/yuan/dns.pdf">https://www2.yocjh.kh.edu.tw/yuan/dns.pdf</a> (<a href="/downloads/dns.pdf">dns.pdf</a>)</p>

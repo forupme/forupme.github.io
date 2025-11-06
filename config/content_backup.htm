@@ -966,7 +966,49 @@ doc["aitetris"].bind("click", aitetris.do)
 <p style="padding-left: 30px;">ibus restart</p>
 <p><span style="background-color: #ffff00;">文字編輯器</span>：</p>
 <p style="padding-left: 30px;">sudo apt install scite</p>
-<h1>Bind</h1>
+<h2>Lubuntu</h2>
+<p>Letsencrypt: <a href="https://certbot.eff.org/instructions">https://certbot.eff.org/instructions</a> </p>
+<p>add s1.eng.nfu.edu.tw into DNS server</p>
+<p><a href="https://certbot.eff.org/instructions?ws=nginx&amp;os=pip">https://certbot.eff.org/instructions?ws=nginx&amp;os=pip</a> </p>
+<p>Get site certificate:</p>
+<p style="padding-left: 30px;">sudo apt update</p>
+<p style="padding-left: 30px;">sudo apt install nginx</p>
+<p style="padding-left: 30px;">sudo apt install python3 python3-dev python3-venv libaugeas-dev gcc</p>
+<p style="padding-left: 30px;">sudo python3 -m venv /opt/certbot/</p>
+<p style="padding-left: 30px;">sudo /opt/certbot/bin/pip install --upgrade pip</p>
+<p style="padding-left: 30px;">sudo /opt/certbot/bin/pip install certbot certbot-nginx</p>
+<p style="padding-left: 30px;">sudo ln -s /opt/certbot/bin/certbot /usr/bin/certbot</p>
+<p style="padding-left: 30px;">sudo certbot certonly --nginx</p>
+<pre style="padding-left: 30px;">echo "0 0,12 * * * root /opt/certbot/bin/python -c 'import random; import time; time.sleep(random.random() * 3600)' &amp;&amp; sudo certbot renew -q" | sudo tee -a /etc/crontab &gt; /dev/null</pre>
+<p>Certificate is saved at: /etc/letsencrypt/live/s1.eng.nfu.edu.tw/fullchain.pem<br/>Key is saved at:         /etc/letsencrypt/live/s1.eng.nfu.edu.tw/privkey.pem</p>
+<p>Nginx:</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">server {
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	# Add index.php to the list if you are using PHP
+	index index.html;
+
+	server_name s1.eng.nfu.edu.tw;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+	
+	# ~/public_html for every user - Lubuntu style
+	location ~ ^/~([^/]+)(/.*)?$ {
+	    alias /home/$1/public_html$2;
+	    autoindex on;
+
+	    # Block hidden files/folders (.git, .htaccess, etc.)
+	    location ~ /\.[^/]*$ { deny all; }
+	}
+}
+
+</pre>
+<p>sudo chmod 711 /home/*</p>
+<p>Result: <a href="http://s1.eng.nfu.edu.tw/~mde">http://s1.eng.nfu.edu.tw/~mde</a></p><h1>Bind</h1>
 <p>Bind Documentation: <a href="https://kb.isc.org/docs/aa-01031">https://kb.isc.org/docs/aa-01031</a> </p>
 <p>Bind DNS 雲端同步設定: <a href="https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf">https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf</a> (<a href="/downloads/dns2.pdf">dns2.pdf</a>)</p>
 <p>DNS Server 的安裝與設定: <a href="https://www2.yocjh.kh.edu.tw/yuan/dns.pdf">https://www2.yocjh.kh.edu.tw/yuan/dns.pdf</a> (<a href="/downloads/dns.pdf">dns.pdf</a>)</p>
@@ -977,7 +1019,7 @@ doc["aitetris"].bind("click", aitetris.do)
 <hr/>
 <p>rocket.nfu.edu.tw DNS 伺服器設定:</p>
 <p>從 /etc/bind/named.conf.local 檔案設定開始:</p>
-<p style="padding-left: 30px;">// 正向區域設定：rocket.nfu.edu.tw<br/>zone "rocket.nfu.edu.tw" {<br/>    type master;<br/>    file "/etc/bind/db.rocket";  // 此處記錄檔需要包含正向 IPv4 和 IPv6 記錄<br/>    also-notify { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-transfer { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-update { none; };<br/>    allow-query { any; };<br/>};<br/><br/>// 反向區域設定：XX.XXX.140.in-addr.arpa<br/>zone "XX.XXX.140.in-addr.arpa" {<br/>    type master;<br/>    file "/etc/bind/db.XX";  // 此檔案包含反向 IPv4 記錄<br/>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv4 位址; };<br/>    allow-query { any; };<br/>};<br/><br/>// 反向區域設定：反向查詢區域 (IPv6)<br/>zone "8.b.d.0.1.0.0.0.2.ip6.arpa" {<br/>    type master;<br/>    file "/etc/bind/db.8.b.d.0.1.0.0.0.2";  // 此檔案包含反向 IPv6 記錄<br/>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv6 位址; };<br/>    allow-query { any; };<br/>};</p>
+<p style="padding-left: 30px;">// 正向區域設定：rocket.nfu.edu.tw<br/>zone "rocket.nfu.edu.tw" {<br/>    type master;<br/>    file "/etc/bind/db.rocket";  // 此處記錄檔需要包含正向 IPv4 和 IPv6 記錄<br/>    also-notify { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-transfer { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-update { none; };<br/>    allow-query { any; };<br/>};<br/><br>// 反向區域設定：XX.XXX.140.in-addr.arpa<br/>zone "XX.XXX.140.in-addr.arpa" {<br/>    type master;<br/>    file "/etc/bind/db.XX";  // 此檔案包含反向 IPv4 記錄<br>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv4 位址; };<br/>    allow-query { any; };<br/>};<br/><br/>// 反向區域設定：反向查詢區域 (IPv6)<br/>zone "8.b.d.0.1.0.0.0.2.ip6.arpa" {<br/>    type master;<br/>    file "/etc/bind/db.8.b.d.0.1.0.0.0.2";  // 此檔案包含反向 IPv6 記錄<br/>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv6 位址; };<br/>    allow-query { any; };<br/>};</br></br></p>
 <hr/>
 <p>named.conf.local 設定是 BIND (Berkeley Internet Name Domain) DNS 伺服器的配置檔案，定義了三個 DNS 區域（zone），分別是主域名區域（正向區域）、IPv4反向區域以及 IPv6 反向區域。<br/><br/>第一個區域設定：zone "rocket.nfu.edu.tw"</p>
 <p style="padding-left: 30px;">zone "rocket.nfu.edu.tw"：</p>
@@ -1062,5 +1104,19 @@ doc["aitetris"].bind("click", aitetris.do)
 <p>Rocketpy + Webots</p>
 <h1>cmsimde</h1>
 <p>How to use cmsimde under Debian (Ubuntu, Linuxmint ...)</p>
+<p>check Python version: for Ubuntu 22.04 the version of Python is 3.10.11</p>
+<p>install Python venv module:</p>
+<p style="padding-left: 30px;">sudo apt install python3.10-venv</p>
+<p>create cmsimde venv</p>
+<p style="padding-left: 30px;">python3 -m venv cmsimde</p>
+<p>get into cmsimde venv</p>
+<p style="padding-left: 30px;">source cmsimde/bin/activate</p>
+<p>under cmsimde venv install modules</p>
+<p style="padding-left: 30px;">(cmsimde) $ pip list</p>
+<p style="padding-left: 30px;">(cmsimde) $ pip install flask flask_cors bs4 lxml pelican markdown</p>
+<p style="padding-left: 30px;">(cmsimde) $ pip list</p>
+<p>deactivate cmsimde venv</p>
+<p style="padding-left: 30px;">(cmsimde) $ deactivate</p>
+<p></p>
 <p></p>
 <p></p>
