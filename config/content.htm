@@ -1007,7 +1007,12 @@ doc["aitetris"].bind("click", aitetris.do)
 }
 
 </pre>
-<p>sudo chmod 711 /home/*</p>
+<p>set nginx as system service:</p>
+<p style="padding-left: 30px;">sudo systemctl enable nginx</p>
+<p style="padding-left: 30px;">sudo systemctl restart nginx</p>
+<p style="padding-left: 30px;">sudo systemctl status nginx</p>
+<p>set user's directory as og+r:</p>
+<p style="padding-left: 30px;">sudo chmod 711 /home/*</p>
 <p>Result: <a href="http://s1.eng.nfu.edu.tw/~mde">http://s1.eng.nfu.edu.tw/~mde</a></p>
 <p>stunnel and waitress:</p>
 <p>stunnel.conf</p>
@@ -1017,7 +1022,38 @@ connect = 127.0.0.1:9443
 cert = /etc/stunnel/fullchain.pem
 key = /etc/stunnel/privkey.pem
 TIMEOUTClose = 0</pre>
-<p></p><h1>Bind</h1>
+<p>啟動 stunnel: sudo /etc/init.d/stunnel4 start</p>
+<p>必須要將 stunnel 與 waitress_server.py 的執行設為系統服務。</p>
+<p>stunnel:</p>
+<p>    sudo -E scite /etc/default/stunnel4 </p>
+<p>    add ENABLED=1</p>
+<p>    sudo systemctl enable stunnel4</p>
+<p>    sudo systemctl start stunnel4</p>
+<p>    sudo systemctl status stunnel4</p>
+<p>set python waitress_server.py under venv as system service:</p>
+<p>/etc/systemd/system/waitress.service:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[Unit]
+Description=Waitress Python Web Server
+After=network.target
+
+[Service]
+# The user account to run the service as:
+User=account
+Group=account
+WorkingDirectory=/home/account/github/eng
+
+# Command to start your script
+# Assume the venv is named cmsimde
+ExecStart=/home/account/cmsimde/bin/python /home/account/github/eng/waitress_server.py
+
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target</pre>
+<p>Set waitress as system service:</p>
+<p style="padding-left: 30px;">Create service    sudo nano /etc/systemd/system/waitress.service<br/>Reload systemd    sudo systemctl daemon-reload<br/>Enable on boot    sudo systemctl enable waitress<br/>Start service    sudo systemctl start waitress<br/>Check logs    sudo journalctl -u waitress -f</p><h1>Bind</h1>
 <p>Bind Documentation: <a href="https://kb.isc.org/docs/aa-01031">https://kb.isc.org/docs/aa-01031</a> </p>
 <p>Bind DNS 雲端同步設定: <a href="https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf">https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf</a> (<a href="/downloads/dns2.pdf">dns2.pdf</a>)</p>
 <p>DNS Server 的安裝與設定: <a href="https://www2.yocjh.kh.edu.tw/yuan/dns.pdf">https://www2.yocjh.kh.edu.tw/yuan/dns.pdf</a> (<a href="/downloads/dns.pdf">dns.pdf</a>)</p>

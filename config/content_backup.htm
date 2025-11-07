@@ -969,7 +969,7 @@ doc["aitetris"].bind("click", aitetris.do)
 <h2>Lubuntu</h2>
 <p>Letsencrypt: <a href="https://certbot.eff.org/instructions">https://certbot.eff.org/instructions</a> </p>
 <p>add s1.eng.nfu.edu.tw into DNS server</p>
-<p><a href="https://certbot.eff.org/instructions?ws=nginx&amp;os=pip">https://certbot.eff.org/instructions?ws=nginx&amp;os=pip</a> </p>
+<p><a href="https://certbot.eff.org/instructions?ws=nginx&amp;os=pip">https://certbot.eff.org/instructions?ws=nginx&amp;os=pip</a></p>
 <p>Get site certificate:</p>
 <p style="padding-left: 30px;">sudo apt update</p>
 <p style="padding-left: 30px;">sudo apt install nginx</p>
@@ -1007,8 +1007,52 @@ doc["aitetris"].bind("click", aitetris.do)
 }
 
 </pre>
-<p>sudo chmod 711 /home/*</p>
-<p>Result: <a href="http://s1.eng.nfu.edu.tw/~mde">http://s1.eng.nfu.edu.tw/~mde</a></p><h1>Bind</h1>
+<p>set nginx as system service:</p>
+<p style="padding-left: 30px;">sudo systemctl enable nginx</p>
+<p style="padding-left: 30px;">sudo systemctl restart nginx</p>
+<p style="padding-left: 30px;">sudo systemctl status nginx</p>
+<p>set user's directory as og+r:</p>
+<p style="padding-left: 30px;">sudo chmod 711 /home/*</p>
+<p>Result: <a href="http://s1.eng.nfu.edu.tw/~mde">http://s1.eng.nfu.edu.tw/~mde</a></p>
+<p>stunnel and waitress:</p>
+<p>stunnel.conf</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[https]
+accept = s1.eng.nfu.edu.tw:443
+connect = 127.0.0.1:9443
+cert = /etc/stunnel/fullchain.pem
+key = /etc/stunnel/privkey.pem
+TIMEOUTClose = 0</pre>
+<p>啟動 stunnel: sudo /etc/init.d/stunnel4 start</p>
+<p>必須要將 stunnel 與 waitress_server.py 的執行設為系統服務。</p>
+<p>stunnel:</p>
+<p>    sudo -E scite /etc/default/stunnel4 </p>
+<p>    add ENABLED=1</p>
+<p>    sudo systemctl enable stunnel4</p>
+<p>    sudo systemctl start stunnel4</p>
+<p>    sudo systemctl status stunnel4</p>
+<p>set python waitress_server.py under venv as system service:</p>
+<p>/etc/systemd/system/waitress.service:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[Unit]
+Description=Waitress Python Web Server
+After=network.target
+
+[Service]
+# The user account to run the service as:
+User=account
+Group=account
+WorkingDirectory=/home/account/github/eng
+
+# Command to start your script
+# Assume the venv is named cmsimde
+ExecStart=/home/account/cmsimde/bin/python /home/account/github/eng/waitress_server.py
+
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target</pre>
+<p></p><h1>Bind</h1>
 <p>Bind Documentation: <a href="https://kb.isc.org/docs/aa-01031">https://kb.isc.org/docs/aa-01031</a> </p>
 <p>Bind DNS 雲端同步設定: <a href="https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf">https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf</a> (<a href="/downloads/dns2.pdf">dns2.pdf</a>)</p>
 <p>DNS Server 的安裝與設定: <a href="https://www2.yocjh.kh.edu.tw/yuan/dns.pdf">https://www2.yocjh.kh.edu.tw/yuan/dns.pdf</a> (<a href="/downloads/dns.pdf">dns.pdf</a>)</p>
@@ -1019,7 +1063,7 @@ doc["aitetris"].bind("click", aitetris.do)
 <hr/>
 <p>rocket.nfu.edu.tw DNS 伺服器設定:</p>
 <p>從 /etc/bind/named.conf.local 檔案設定開始:</p>
-<p style="padding-left: 30px;">// 正向區域設定：rocket.nfu.edu.tw<br/>zone "rocket.nfu.edu.tw" {<br/>    type master;<br/>    file "/etc/bind/db.rocket";  // 此處記錄檔需要包含正向 IPv4 和 IPv6 記錄<br/>    also-notify { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-transfer { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-update { none; };<br/>    allow-query { any; };<br/>};<br/><br>// 反向區域設定：XX.XXX.140.in-addr.arpa<br/>zone "XX.XXX.140.in-addr.arpa" {<br/>    type master;<br/>    file "/etc/bind/db.XX";  // 此檔案包含反向 IPv4 記錄<br>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv4 位址; };<br/>    allow-query { any; };<br/>};<br/><br/>// 反向區域設定：反向查詢區域 (IPv6)<br/>zone "8.b.d.0.1.0.0.0.2.ip6.arpa" {<br/>    type master;<br/>    file "/etc/bind/db.8.b.d.0.1.0.0.0.2";  // 此檔案包含反向 IPv6 記錄<br/>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv6 位址; };<br/>    allow-query { any; };<br/>};</br></br></p>
+<p style="padding-left: 30px;">// 正向區域設定：rocket.nfu.edu.tw<br/>zone "rocket.nfu.edu.tw" {<br/>    type master;<br/>    file "/etc/bind/db.rocket";  // 此處記錄檔需要包含正向 IPv4 和 IPv6 記錄<br>    also-notify { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-transfer { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-update { none; };<br/>    allow-query { any; };<br>};<br/><br/>// 反向區域設定：XX.XXX.140.in-addr.arpa<br/>zone "XX.XXX.140.in-addr.arpa" {<br>    type master;<br/>    file "/etc/bind/db.XX";  // 此檔案包含反向 IPv4 記錄<br/>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv4 位址; };<br/>    allow-query { any; };<br/>};<br/><br/>// 反向區域設定：反向查詢區域 (IPv6)<br/>zone "8.b.d.0.1.0.0.0.2.ip6.arpa" {<br/>    type master;<br/>    file "/etc/bind/db.8.b.d.0.1.0.0.0.2";  // 此檔案包含反向 IPv6 記錄<br/>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv6 位址; };<br/>    allow-query { any; };<br/>};</br></br></br></p>
 <hr/>
 <p>named.conf.local 設定是 BIND (Berkeley Internet Name Domain) DNS 伺服器的配置檔案，定義了三個 DNS 區域（zone），分別是主域名區域（正向區域）、IPv4反向區域以及 IPv6 反向區域。<br/><br/>第一個區域設定：zone "rocket.nfu.edu.tw"</p>
 <p style="padding-left: 30px;">zone "rocket.nfu.edu.tw"：</p>
