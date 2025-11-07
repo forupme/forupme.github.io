@@ -131,7 +131,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li><a href='MISC.html'>MISC</a><li><a href='GW.html'>GW</a><li><a href='Webots.html'>Webots</a><li><a href='FossilSCM.html'>FossilSCM</a><li><a href='Reeborg.html'>Reeborg</a><li><a href='NX2312.html'>NX2312</a><li><a href='Brython.html'>Brython</a></li></ul><li class='has-children'><a href='Linux.html'>Linux</a><ul class='dropdown'><li><a href='Lubuntu.html'>Lubuntu</a></li></ul><li><a href='Bind.html'>Bind</a><li><a href='Squid.html'>Squid</a><li><a href='Rocket.html'>Rocket</a><li><a href='cmsimde.html'>cmsimde</a></li>
+                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li><a href='MISC.html'>MISC</a><li><a href='GW.html'>GW</a><li><a href='Webots.html'>Webots</a><li><a href='FossilSCM.html'>FossilSCM</a><li><a href='Reeborg.html'>Reeborg</a><li><a href='NX2312.html'>NX2312</a><li><a href='Brython.html'>Brython</a></li></ul><li><a href='PGP.html'>PGP</a><li class='has-children'><a href='Linux.html'>Linux</a><ul class='dropdown'><li><a href='Lubuntu.html'>Lubuntu</a><li><a href='Windows.html'>Windows</a></li></ul><li><a href='Bind.html'>Bind</a><li><a href='Squid.html'>Squid</a><li class='has-children'><a href='RL.html'>RL</a><ul class='dropdown'><li><a href='Rocket.html'>Rocket</a></li></ul><li><a href='cmsimde.html'>cmsimde</a></li>
                       </ul>
                 </nav>
               </div>
@@ -142,7 +142,7 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Linux << <a href='Linux.html'>Previous</a> <a href='Bind.html'>Next</a> >> Bind<br /><h1>Lubuntu</h1>
+    <div id="tipue_search_content">Linux << <a href='Linux.html'>Previous</a> <a href='Windows.html'>Next</a> >> Windows<br /><h1>Lubuntu</h1>
 <p>Letsencrypt: <a href="https://certbot.eff.org/instructions">https://certbot.eff.org/instructions</a> </p>
 <p>add s1.eng.nfu.edu.tw into DNS server</p>
 <p><a href="https://certbot.eff.org/instructions?ws=nginx&amp;os=pip">https://certbot.eff.org/instructions?ws=nginx&amp;os=pip</a></p>
@@ -193,7 +193,7 @@ img.add_border {
 <p>stunnel and waitress:</p>
 <p>stunnel.conf</p>
 <pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[https]
-accept = s1.eng.nfu.edu.tw:443
+accept = server_name:443
 connect = 127.0.0.1:9443
 cert = /etc/stunnel/fullchain.pem
 key = /etc/stunnel/privkey.pem
@@ -229,7 +229,8 @@ Environment=PYTHONUNBUFFERED=1
 [Install]
 WantedBy=multi-user.target</pre>
 <p>Set waitress as system service:</p>
-<p style="padding-left: 30px;">Create service    sudo nano /etc/systemd/system/waitress.service<br/>Reload systemd    sudo systemctl daemon-reload<br/>Enable on boot    sudo systemctl enable waitress<br/>Start service    sudo systemctl start waitress<br/>Check logs    sudo journalctl -u waitress -f</p><br />Linux << <a href='Linux.html'>Previous</a> <a href='Bind.html'>Next</a> >> Bind</div>
+<p style="padding-left: 30px;">Create service    sudo nano /etc/systemd/system/waitress.service<br/>Reload systemd    sudo systemctl daemon-reload<br/>Enable on boot    sudo systemctl enable waitress<br/>Start service    sudo systemctl start waitress<br/>Check logs    sudo journalctl -u waitress -f</p>
+<br />Linux << <a href='Linux.html'>Previous</a> <a href='Windows.html'>Next</a> >> Windows</div>
         
     <!-- footer -->
       <div class="container">
