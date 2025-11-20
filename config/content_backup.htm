@@ -1025,7 +1025,6 @@ connect = 127.0.0.1:9443
 cert = /etc/stunnel/fullchain.pem
 key = /etc/stunnel/privkey.pem
 TIMEOUTClose = 0</pre>
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 <p>啟動 stunnel: sudo /etc/init.d/stunnel4 start</p>
 <p>必須要將 stunnel 與 waitress_server.py 的執行設為系統服務。</p>
 <p>stunnel:</p>
@@ -1057,9 +1056,8 @@ Environment=PYTHONUNBUFFERED=1
 [Install]
 WantedBy=multi-user.target</pre>
 <p>Set waitress as system service:</p>
-<p style="padding-left: 30px;">Create service    sudo nano /etc/systemd/system/waitress.service<br/>Reload systemd    sudo systemctl daemon-reload<br/>Enable on boot    sudo systemctl enable waitress<br/>Start service    sudo systemctl start waitress<br/>Check logs    sudo journalctl -u waitress -f</p><h1>Bind</h1>
-=======
-<p></p><h2>Windows</h2>
+<p style="padding-left: 30px;">Create service    sudo nano /etc/systemd/system/waitress.service<br/>Reload systemd    sudo systemctl daemon-reload<br/>Enable on boot    sudo systemctl enable waitress<br/>Start service    sudo systemctl start waitress<br/>Check logs    sudo journalctl -u waitress -f</p>
+<h2>Windows</h2>
 <p>nginx 設定為各用戶可以透過 public_html 共用全球資訊網伺服器:</p>
 <p>nginx.conf</p>
 <pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">worker_processes  1;
@@ -1114,8 +1112,8 @@ http {
     }
 }</pre>
 <p>上述 nginx.conf 設定完成後，以 nssm install nginx 配置以服務執行 nginx.exe 後，再允許 nginx.exe 接受防火牆的輸入原則連線:</p>
-<p style="padding-left: 30px;"><a href="http://s4.eng.nfu.edu.tw/~pj2023">http://s4.eng.nfu.edu.tw/~pj2023</a> </p><h1>Bind</h1>
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 38dfa9cfad3a34708791260573b6eea29b5e1ce2
+<p style="padding-left: 30px;"><a href="http://s4.eng.nfu.edu.tw/~pj2023">http://s4.eng.nfu.edu.tw/~pj2023</a> </p>
+<h1>Bind</h1>
 <p>Bind Documentation: <a href="https://kb.isc.org/docs/aa-01031">https://kb.isc.org/docs/aa-01031</a> </p>
 <p>Bind DNS 雲端同步設定: <a href="https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf">https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf</a> (<a href="/downloads/dns2.pdf">dns2.pdf</a>)</p>
 <p>DNS Server 的安裝與設定: <a href="https://www2.yocjh.kh.edu.tw/yuan/dns.pdf">https://www2.yocjh.kh.edu.tw/yuan/dns.pdf</a> (<a href="/downloads/dns.pdf">dns.pdf</a>)</p>
@@ -1191,7 +1189,8 @@ http {
 <p>修改設定說明:</p>
 <p style="padding-left: 30px;">序號（Serial Number）：2025110201 是一個用來標示該區域檔案版本的序號，每次你修改區域檔案時，應該增加這個序號。</p>
 <p style="padding-left: 30px;">TTL（Time-to-Live）：指定 DNS 記錄的緩存時間。這裡設為 86400 秒（24 小時）。</p>
-<p style="padding-left: 30px;">PTR (PoinTeR) 記錄：這是將 IP 地址反向查詢回對應的域名。這些記錄應該根據你的實際 IP 地址範圍進行配置。<br/><br/></p><h1>Squid</h1>
+<p style="padding-left: 30px;">PTR (PoinTeR) 記錄：這是將 IP 地址反向查詢回對應的域名。這些記錄應該根據你的實際 IP 地址範圍進行配置。<br/><br/></p>
+<h1>Squid</h1>
 <p><a href="https://www.squid-cache.org/">https://www.squid-cache.org/</a> </p>
 <p><a href="/downloads/proxy基本設定.pdf">proxy基本設定.pdf</a></p>
 <p>代理伺服器<br/><br/>代理伺服器是位於用戶端和目標伺服器之間的電腦系統。當客戶端向目標伺服器發起資源請求時，代理伺服器會介入連線，並向目標伺服器發出請求。收到回應後，代理伺服器會將其傳回給用戶端。</p>
@@ -1209,27 +1208,8 @@ http {
 <p><a href="https://proceedings.scipy.org/articles/majora-212e5952-020">https://proceedings.scipy.org/articles/majora-212e5952-020</a> </p>
 <p><a href="https://openrocket.info/">https://openrocket.info/</a> </p>
 <p><a href="https://www.rocksim.com/">https://www.rocksim.com/</a> </p>
-<<<<<<< HEAD
 <p>Rocketpy + Webots</p>
 <h1>cmsimde</h1>
-<p>How to use cmsimde under Debian (Ubuntu, Linuxmint ...)</p>
-<p>check Python version: for Ubuntu 22.04 the version of Python is 3.10.11</p>
-<p>install Python venv module:</p>
-<p style="padding-left: 30px;">sudo apt install python3.10-venv</p>
-<p>create cmsimde venv</p>
-<p style="padding-left: 30px;">python3 -m venv cmsimde</p>
-<p>get into cmsimde venv</p>
-<p style="padding-left: 30px;">source cmsimde/bin/activate</p>
-<p>under cmsimde venv install modules</p>
-<p style="padding-left: 30px;">(cmsimde) $ pip list</p>
-<p style="padding-left: 30px;">(cmsimde) $ pip install flask flask_cors bs4 lxml pelican markdown</p>
-<p style="padding-left: 30px;">(cmsimde) $ pip list</p>
-<p>deactivate cmsimde venv</p>
-<p style="padding-left: 30px;">(cmsimde) $ deactivate</p>
-<p></p>
-<p></p>
-=======
-<p>Rocketpy + Webots</p><h1>cmsimde</h1>
 <p>在 Debian 類 (例如: Ubuntu、Linuxmint、Lubuntu 等) 如何使用 cmsimde 網際內容管理。</p>
 <p>How to use cmsimde under Debian (Ubuntu, Linuxmint ...):</p>
 <p>首先應該要先查詢當下所使用操作系統所配置的 Python 版本，並隨即配合安裝 venv 模組。</p>
@@ -1250,6 +1230,11 @@ http {
 <p>cmsimde 虛擬環境使用結束，利用 deactivate 指令退出:</p>
 <p>deactivate cmsimde venv</p>
 <p style="padding-left: 30px;">(cmsimde) $ deactivate</p>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+<h1>Virtualbox</h1>
+<p></p>
+<p></p>
+=======
 <hr/>
 <p>cmsimde 網際內容管理系統的啟動分為開發模式 (development) 與生產模式 (production):</p>
 <p>開發模式: 在 Windows, 使用 cms.bat 或在 Linux 使用 ./cms</p>
@@ -1304,5 +1289,5 @@ connect = 127.0.0.1:9443
 cert = /etc/stunnel/fullchain.pem
 key = /etc/stunnel/privkey.pem
 TIMEOUTClose = 0</pre>
->>>>>>> 81dbf4db8e66e917e03c7db6ed7ce3ee02397f78
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 81dbf4db8e66e917e03c7db6ed7ce3ee02397f78
 <p></p>
