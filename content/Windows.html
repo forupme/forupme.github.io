@@ -142,14 +142,63 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">FossilSCM << <a href='FossilSCM.html'>Previous</a> <a href='NX2312.html'>Next</a> >> NX2312<br /><h1>Reeborg</h1>
-<p><a href="https://eng.nfu.edu.tw/reeborg">https://eng.nfu.edu.tw/reeborg</a> </p>
-<p>假如利用相對路徑呼叫 URL 變數值:</p>
-<p>以下為單數行面向北收成後，雙數行向南收成。</p>
-<p><a href="https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1.py">https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1.py</a> </p>
-<p>以下則為東西方向收成。</p>
-<p><a href="https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1_east_west.py">https://eng.nfu.edu.tw/reeborg?lang=en&amp;mode=python&amp;menu=worlds/menus/select_collection_en.json&amp;name=Alone&amp;url=worlds/tutorial_en/harvest1.json&amp;editor=python/harvest1_east_west.py </a> </p>
-<br />FossilSCM << <a href='FossilSCM.html'>Previous</a> <a href='NX2312.html'>Next</a> >> NX2312</div>
+    <div id="tipue_search_content">Lubuntu << <a href='Lubuntu.html'>Previous</a> <a href='Bind.html'>Next</a> >> Bind<br /><h1>Windows</h1>
+<p>nginx 設定為各用戶可以透過 public_html 共用全球資訊網伺服器:</p>
+<p>nginx.conf</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile      on;
+    keepalive_timeout  65;
+
+    server {
+        listen       [::]:80 default_server;
+        server_name  s4.eng.nfu.edu.tw;
+
+        # 主網站根目錄
+        root   C:/nginx-1.28.0/html;
+        index  index.html;
+
+        # user 個人網站
+        location ~ ^/~([^/]+)(/.*)?$ {
+            set $user     $1;
+            set $subpath  $2;
+            if ($subpath = "") { set $subpath "/"; }
+
+            # Windows 可以強制用正斜線
+            set $home  C:/Users/$user/public_html$subpath;
+
+            # 若無 public_html 則傳回 404
+            if (!-d C:/Users/$user/public_html) {
+                return 404;
+            }
+
+            alias $home;
+            autoindex on;
+        }
+
+        # 主要檔案服務
+        location / {
+            try_files $uri $uri/ =404;
+        }
+
+        # 全局禁止 .git、.htaccess 等隱藏檔
+        location ~ /\.(?!well-known).* {
+            deny all;
+            access_log off;
+            log_not_found off;
+        }
+    }
+}</pre>
+<p>上述 nginx.conf 設定完成後，以 nssm install nginx 配置以服務執行 nginx.exe 後，再允許 nginx.exe 接受防火牆的輸入原則連線:</p>
+<p style="padding-left: 30px;"><a href="http://s4.eng.nfu.edu.tw/~pj2023">http://s4.eng.nfu.edu.tw/~pj2023</a> </p>
+<br />Lubuntu << <a href='Lubuntu.html'>Previous</a> <a href='Bind.html'>Next</a> >> Bind</div>
         
     <!-- footer -->
       <div class="container">
