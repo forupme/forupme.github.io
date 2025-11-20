@@ -966,7 +966,8 @@ doc["aitetris"].bind("click", aitetris.do)
 <p style="padding-left: 30px;">ibus restart</p>
 <p><span style="background-color: #ffff00;">文字編輯器</span>：</p>
 <p style="padding-left: 30px;">sudo apt install scite</p>
-<h1>Bind</h1>
+<h2>HP server</h2>
+<p>先裝 Ubuntu 22.04 LTS server, 之後再裝 Desktop + xrdp + xorgxrdp</p><h1>Bind</h1>
 <p>Bind Documentation: <a href="https://kb.isc.org/docs/aa-01031">https://kb.isc.org/docs/aa-01031</a> </p>
 <p>Bind DNS 雲端同步設定: <a href="https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf">https://www.ilrc.edu.tw/var/file/0/1000/img/7/dns.pdf</a> (<a href="/downloads/dns2.pdf">dns2.pdf</a>)</p>
 <p>DNS Server 的安裝與設定: <a href="https://www2.yocjh.kh.edu.tw/yuan/dns.pdf">https://www2.yocjh.kh.edu.tw/yuan/dns.pdf</a> (<a href="/downloads/dns.pdf">dns.pdf</a>)</p>
@@ -979,7 +980,7 @@ doc["aitetris"].bind("click", aitetris.do)
 <p>從 /etc/bind/named.conf.local 檔案設定開始:</p>
 <p style="padding-left: 30px;">// 正向區域設定：rocket.nfu.edu.tw<br/>zone "rocket.nfu.edu.tw" {<br/>    type master;<br/>    file "/etc/bind/db.rocket";  // 此處記錄檔需要包含正向 IPv4 和 IPv6 記錄<br/>    also-notify { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-transfer { 填入第二台 dns IPv4 位址; 填入第二台 dns IPv6 位址; };<br/>    allow-update { none; };<br/>    allow-query { any; };<br/>};<br/><br/>// 反向區域設定：XX.XXX.140.in-addr.arpa<br/>zone "XX.XXX.140.in-addr.arpa" {<br/>    type master;<br/>    file "/etc/bind/db.XX";  // 此檔案包含反向 IPv4 記錄<br/>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv4 位址; };<br/>    allow-query { any; };<br/>};<br/><br/>// 反向區域設定：反向查詢區域 (IPv6)<br/>zone "8.b.d.0.1.0.0.0.2.ip6.arpa" {<br/>    type master;<br/>    file "/etc/bind/db.8.b.d.0.1.0.0.0.2";  // 此檔案包含反向 IPv6 記錄<br/>    allow-update { none; };<br/>    notify yes;<br/>    also-notify { 填入第二台 dns IPv6 位址; };<br/>    allow-query { any; };<br/>};</p>
 <hr/>
-<p>這段 named.conf.local 設定是 BIND (Berkeley Internet Name Domain) DNS 伺服器的配置檔案，定義了兩個 DNS 區域（zone），分別是主域名區域（正向區域）和反向區域。<br/><br/>第一個區域設定：zone "rocket.nfu.edu.tw"</p>
+<p>named.conf.local 設定是 BIND (Berkeley Internet Name Domain) DNS 伺服器的配置檔案，定義了三個 DNS 區域（zone），分別是主域名區域（正向區域）、IPv4反向區域以及 IPv6 反向區域。<br/><br/>第一個區域設定：zone "rocket.nfu.edu.tw"</p>
 <p style="padding-left: 30px;">zone "rocket.nfu.edu.tw"：</p>
 <p style="padding-left: 60px;">這是正向區域的名稱設定，即 rocket.nfu.edu.tw 這個域名的 DNS 記錄配置。當有人查詢這個域名時，DNS 伺服器會使用此區域文件來進行解析。</p>
 <p style="padding-left: 30px;">type master;：</p>
@@ -997,7 +998,7 @@ doc["aitetris"].bind("click", aitetris.do)
 <hr/>
 <p>第二個區域設定：zone "XX.XXX.140.in-addr.arpa"</p>
 <p>zone "XX.XXX.140.in-addr.arpa":</p>
-<p style="padding-left: 30px;">這是定義了反向 DNS 區域（reverse DNS zone）XX.XXX.140.in-addr.arpa。反向查詢區域是用來將 IP 地址解析回對應的域名。這裡的 XX.XXX.140 是某個特定網段的反向查詢區域。</p>
+<p style="padding-left: 30px;">這是定義了反向 DNS 區域（reverse DNS zone）XX.XXX.140.in-addr.arpa。反向查詢區域是用來將 IP 地址解析回對應的域名。這裡的 XX.XXX.140 是某個特定網段的反向查詢區域。反向區域是用來將 IP 地址映射回域名的區域，這裡假設你有一個 IP 範圍 192.168.140.x，因此反向查詢區域的名稱就是 140.168.192.in-addr.arpa，這是為了將 IPv4 地址轉換回主機名</p>
 <p>type master;:</p>
 <p style="padding-left: 30px;">和第一個區域一樣，這裡設定為 master，表示這是反向查詢區域的主區域。</p>
 <p>file "/etc/bind/db.XX";:</p>
@@ -1011,18 +1012,20 @@ doc["aitetris"].bind("click", aitetris.do)
 <p>allow-query { any; };:</p>
 <p style="padding-left: 30px;">這行允許任何 IP 位址進行查詢，無論是正向查詢還是反向查詢。</p>
 <hr/>
-<p>zone "XX.XXX.140.in-addr.arpa"：</p>
+<p>第三個反向區域設定：8.b.d.0.1.0.0.0.2.ip6.arpa</p>
 <p>這是反向區域的名稱。反向區域是用來將 IP 地址映射回域名的區域，這裡假設你有一個 IP 範圍 192.168.140.x，因此反向查詢區域的名稱就是 140.168.192.in-addr.arpa，這是為了將 IPv4 地址轉換回主機名。</p>
+<p>zone "8.b.d.0.1.0.0.0.2.ip6.arpa"：</p>
+<p style="padding-left: 30px;">這是 IPv6 反向區域的名稱。類似於 IPv4 反向查詢，IPv6 反向查詢區域的名稱是由 IPv6 地址倒序組成的，並以 ip6.arpa 結尾。此處 8.b.d.0.1.0.0.0.2.ip6.arpa 表示處理 2001:db8::8 這樣的 IPv6 地址的反向查詢。</p>
 <p>type master;：</p>
 <p style="padding-left: 30px;">設定此區域為 "master"（主區域）。這意味著該 DNS 伺服器是該反向區域的權威伺服器。</p>
-<p>file "/etc/bind/db.XX";：</p>
-<p style="padding-left: 30px;">指定反向區域的資料檔案位置。該檔案 /etc/bind/db.XX 應該包含反向查詢的 PTR 記錄。</p>
+<p>file "/etc/bind/db.8.b.d.0.1.0.0.0.2";：</p>
+<p style="padding-left: 30px;">指定 IPv6 反向區域的資料檔案位置。該檔案應該包含反向查詢的 PTR 記錄，這些記錄將 IPv6 地址映射回主機名。</p>
 <p>allow-update { none; };：</p>
-<p style="padding-left: 30px;">這條規則禁止外部更新該區域的記錄，即外部無法動態修改反向解析記錄。</p>
+<p style="padding-left: 30px;">禁止外部對此區域進行動態更新，即外部無法修改 IPv6 反向查詢記錄。</p>
 <p>notify yes;：</p>
 <p style="padding-left: 30px;">啟用通知功能，表示當該區域的記錄變更時，DNS 伺服器將會通知其他伺服器。這是為了確保主伺服器的更新能夠快速同步到其他 DNS 伺服器。</p>
-<p>also-notify { 填入第二台 dns IPv4 位址; };：</p>
-<p style="padding-left: 30px;">配置 DNS 伺服器在該區域更新後，會將更新通知發送給指定的備援 DNS 伺服器。這裡填寫第二台 DNS 伺服器的 IPv4 位址。</p>
+<p>also-notify { 填入第二台 dns IPv6 位址; };：</p>
+<p style="padding-left: 30px;">置備援 DNS 伺服器的 IPv6 地址，在主伺服器資料更新後會通知這些伺服器。</p>
 <p>allow-query { any; };：</p>
 <p style="padding-left: 30px;">設定反向區域的查詢規則，any 表示允許所有來源的查詢。</p>
 <hr/>
@@ -1051,7 +1054,14 @@ doc["aitetris"].bind("click", aitetris.do)
 <p><br/>五、透過不將用戶電腦直接暴露於互聯網上來增強用戶隱私<br/><br/>代理伺服器可以隱藏用戶的真實 IP 地址，通過代理伺服器的 IP 地址來訪問外部網站。這樣，用戶的身份和位置信息將無法直接被目標伺服器獲得，有效保護用戶隱私。此外，這還能避免一些網絡攻擊（如 DDoS 攻擊）直接針對用戶端。<br/><br/>六、在不同的 Web 伺服器之間分配負載，以減輕單一伺服器的負載<br/><br/>負載均衡是一個常見的代理伺服器用途。代理伺服器可以根據預設的負載均衡策略（如輪詢、最少連接等）將流量分配到多個 Web 伺服器。這樣可以避免單一伺服器過載，確保服務的高可用性和性能，並且對用戶而言，網站的響應速度和穩定性也會得到提升。<br/><br/>七、提升效能較差的 Web 伺服器的效能<br/><br/>即使是效能較差的 Web 伺服器，也能通過代理伺服器進行優化。代理伺服器可以將經常訪問的內容進行快取，減少 Web 伺服器的負擔，並提升其處理請求的能力。這樣，即使後端伺服器的性能較差，用戶也能夠獲得更好的使用體驗。</p>
 <p>八、使用整合的病毒/惡意軟體偵測系統過濾請求或回應<br/><br/>一些代理伺服器內建有防病毒和惡意軟體掃描功能，當用戶發送請求或伺服器返回數據時，代理伺服器會檢查內容是否包含病毒、木馬、間諜軟體或其他類型的惡意程式。這能有效地阻止不安全的網站或不良資源進入用戶端，提高網絡安全性。<br/><br/>九、在多個網際網路連線之間平衡網路流量<br/><br/>當企業或組織擁有多條網際網路連線時，代理伺服器可以在這些連線之間進行流量平衡。這樣可以確保即使某一條線路擁塞或發生故障，其他線路可以繼續承擔流量，從而提升網絡的可靠性和穩定性。</p>
 <p>十、在區域網路內中繼流量<br/><br/>代理伺服器也可以用來在區域網路（LAN）內部中繼流量，將內部用戶的請求轉發給外部網絡。這對於需要訪問外部網站或服務的內部用戶來說，可以提供更好的流量管理、監控及安全保障。通過代理伺服器，內部網絡可以有效集中管理和過濾外部流量，減少安全風險。<br/><br/></p>
-<h1>Rocket</h1>
+<h1>VM</h1>
+<p>Virtual Machine 虛擬主機</p>
+<p></p>
+<p>Type-1（Bare-metal）虛擬化管理程式:</p>
+<p style="padding-left: 30px;"><a href="https://www.proxmox.com/en/products/proxmox-virtual-environment/overview">Proxmox Virtual Environment</a></p>
+<p>Type-2（Hosted）虛擬化管理程式:</p>
+<p style="padding-left: 30px;"><a href="https://www.virtualbox.org/wiki/Downloads">Virtualbox</a></p>
+<p style="padding-left: 30px;"></p><h1>Rocket</h1>
 <p><a href="https://rocketpy-team.github.io/">https://rocketpy-team.github.io/</a> </p>
 <p><a href="https://github.com/mdecycu/RocketPy">https://github.com/mdecycu/RocketPy</a> </p>
 <p><a href="https://proceedings.scipy.org/articles/majora-212e5952-020">https://proceedings.scipy.org/articles/majora-212e5952-020</a> </p>
