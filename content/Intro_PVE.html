@@ -2,6 +2,7 @@
         <head>
         <title>ENGroup 網站</title>
         <meta charset="utf-8">
+<meta property="head" content="H3">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/css/bootstrap.min.css">
@@ -141,21 +142,63 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content"> <a href='MISC.html'>Next</a> >> MISC<br /><h1>About</h1>
-<p>國立虎尾科技大學<span style="background-color: #ffff00;">火箭技術開發團隊</span>協同設計室:</p>
-<p>Collaborative Design Lab of National Formosa University <span style="background-color: #ffff00;">Rocket Technology Exploration Team</span> (CDL of RTET) :</p>
-<p>第一小組: <span style="background-color: #ffff00;">MDE</span> 任務導向設計工程團隊 (Mission Design Engineering): mde dot nfu dot edu dot tw</p>
-<p style="padding-left: 30px;">Mission：任務導向。<br/><br/>Design：設計，包含火箭構型、結構、推進系統等。<br/><br/>Engineering：工程，所有研究與技術開發的基礎。</p>
-<p>第二小組: <span style="background-color: #ffff00;">ENG</span> 探索導航引導團隊 (Exploration, Navigation, Guidance): eng dot nfu dot edu dot tw</p>
-<p style="padding-left: 30px;">Exploration: 火箭探索，涉及對火箭設計與製造相關研發探索。<br/><br/>Navigation: 火箭導航，指火箭發射升空之路徑規劃。<br/><br/>Guidance: 火箭引導，與火箭的控制系統和飛行軌跡的精確引導有關。</p>
-<p>第三小組: <span style="background-color: #ffff00;">Rocket</span> 火箭技術開發團隊 (Rocket Technology Exploration Team): rocket dot nfu dot edu dot tw</p>
-<p><img caption="false" height="213" src="./../images/mde.png" width="200"/></p>
-<p><img alt="" height="209" src="./../images/mde2.png" width="200"/></p>
-<p>這裡是 ENGroup 網站:</p>
-<p>本網站 UR: <a href="https://eng.nfu.edu.tw">https://eng.nfu.edu.tw</a> </p>
-<p>本網站倉儲: <a href="https://github.com/forupme/forupme.github.io">https://github.com/forupme/forupme.github.io</a></p>
-<p>討論: <a href="https://github.com/forupme/forupme.github.io/discussions">https://github.com/forupme/forupme.github.io/discussions</a> </p>
-<br /> <a href='MISC.html'>Next</a> >> MISC</div>
+    <div id="tipue_search_content">Proxmox VE << <a href='Proxmox VE.html'>Previous</a> <br /><h1>Intro_PVE</h1>
+<p>準備安裝媒體: <a href="https://pve.proxmox.com/wiki/Prepare_Installation_Media">https://pve.proxmox.com/wiki/Prepare_Installation_Media</a> </p>
+<p style="padding-left: 30px;">準備好一個固定的 IPv6 address</p>
+<p style="padding-left: 30px;">將 IPv6 address 與 domain name 在 DNS 伺服器中登記</p>
+<p style="padding-left: 30px;">準備好一個 USB 隨身碟</p>
+<p style="padding-left: 30px;">利用 <a href="https://etcher.balena.io/">https://etcher.balena.io/</a> 將 <a href="https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso">https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso</a> flask 至隨身碟</p>
+<p style="padding-left: 30px;">利用隨身碟開機 (使用 HP server 機體背後的 USB 插槽) 安裝</p>
+<p style="padding-left: 60px;">設定 root 管理者密碼</p>
+<p style="padding-left: 60px;">設定 IPv6 address, Gateway, DNS 伺服器</p>
+<p style="padding-left: 30px;">完成後以伺服器的 IPv6 address 連接: <a href="https://[IPv6_address]:8006">https://[IPv6_address]:8006</a></p>
+<p style="padding-left: 30px;">透過 <a href="https://zh.wikipedia.org/zh-tw/%E8%87%AA%E5%8B%95%E6%86%91%E8%AD%89%E6%9B%B4%E6%96%B0%E7%92%B0%E5%A2%83">ACME</a> 從 <a href="https://certbot.eff.org/hosting_providers">Letsencrypt</a> 取得網站符號名稱認證簽章</p>
+<div class="paragraph">
+<p>The project started in 2007, followed by a first stable version in 2008. At the time we used OpenVZ for containers, and QEMU with KVM for virtual machines. The clustering features were limited, and the user interface was simple (server generated web page).</p>
+</div>
+<div class="paragraph">
+<p>But we quickly developed new features using the <a href="https://corosync.github.io/corosync/">Corosync</a> cluster stack, and the introduction of the new Proxmox cluster file system (pmxcfs) was a big step forward, because it completely hides the cluster complexity from the user. Managing a cluster of 16 nodes is as simple as managing a single node.</p>
+</div>
+<div class="paragraph">
+<p>The introduction of our new REST API, with a complete declarative specification written in JSON-Schema, enabled other people to integrate Proxmox VE into their infrastructure, and made it easy to provide additional services.</p>
+</div>
+<div class="paragraph">
+<p>Also, the new REST API made it possible to replace the original user interface with a modern client side single-page application using JavaScript. We also replaced the old Java based VNC console code with <a href="https://kanaka.github.io/noVNC/">noVNC</a>. So you only need a web browser to manage your VMs.</p>
+</div>
+<div class="paragraph">
+<p>The support for various storage types is another big task. Notably, Proxmox VE was the first distribution to ship <a href="https://zfsonlinux.org/">ZFS on Linux</a> by default in 2014. Another milestone was the ability to run and manage <a href="https://ceph.com/">Ceph</a> storage on the hypervisor nodes. Such setups are extremely cost effective.</p>
+</div>
+<div class="paragraph">
+<p>When our project started we were among the first companies providing commercial support for KVM. The KVM project itself continuously evolved, and is now a widely used hypervisor. New features arrive with each release. We developed the KVM live backup feature, which makes it possible to create snapshot backups on any storage type.</p>
+</div>
+<div class="paragraph">
+<p>The most notable change with version 4.0 was the move from OpenVZ to <a href="https://linuxcontainers.org/">LXC</a>. Containers are now deeply integrated, and they can use the same storage and network features as virtual machines. At the same time we introduced the easy-to-use <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#chapter_ha_manager">High Availability (HA) manager</a>, simplifying the configuration and management of highly available setups.</p>
+</div>
+<div class="paragraph">
+<p>During the development of Proxmox VE 5 the asynchronous <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#chapter_pvesr">storage replication</a> as well as automated <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#sysadmin_certificate_management">certificate management</a> using ACME/Let’s Encrypt were introduced, among many other features.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#chapter_pvesdn">Software Defined Network (SDN)</a> stack was developed in cooperation with our community. It was integrated into the web interface as an experimental feature in version 6.2, simplifying the management of sophisticated network configurations. Since version 8.1, the SDN integration is fully supported and installed by default.</p>
+</div>
+<div class="paragraph">
+<p>2020 marked the release of a new project, the <a href="https://www.proxmox.com/en/products/proxmox-backup-server/overview">Proxmox Backup Server</a>, written in the Rust programming language. Proxmox Backup Server is deeply integrated with Proxmox VE and significantly improves backup capabilities by implementing incremental backups, deduplication, and much more.</p>
+</div>
+<div class="paragraph">
+<p>Another new tool, the <a href="https://pom.proxmox.com">Proxmox Offline Mirror</a>, was released in 2022, enabling subscriptions for systems which have no connection to the public internet.</p>
+</div>
+<div class="paragraph">
+<p>The highly requested dark theme for the web interface was introduced in 2023. Later that year, version 8.0 integrated access to the Ceph enterprise repository. Now access to the most stable Ceph repository comes with any Proxmox VE subscription.</p>
+</div>
+<div class="paragraph">
+<p>Automated and unattended installation for the official <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#installation_installer">ISO installer</a> was introduced in version 8.2, significantly simplifying large deployments of Proxmox VE.</p>
+</div>
+<div class="paragraph">
+<p>With the <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#qm_import_virtual_machines">import wizard</a>, equally introduced in version 8.2, users can easily and efficiently migrate guests directly from other hypervisors like VMware ESXi <span class="footnote" data-note='Migrate to Proxmox VE
+&lt;a href="https://pve.proxmox.com/wiki/Migrate_to_Proxmox_VE"&gt;https://pve.proxmox.com/wiki/Migrate_to_Proxmox_VE&lt;/a&gt;'>[<a class="footnote" href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#_footnote_1" id="_footnoteref_1" title="View footnote">1</a>]</span>. Additionally, archives in Open Virtualization Format (OVF/OVA) can now be directly imported from file-based storages in the web interface.</p>
+</div>
+<p>From <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html">https://pve.proxmox.com/pve-docs/pve-admin-guide.html</a> </p>
+<p>Proxmox VE is a platform to run virtual machines and containers. It is based on Debian Linux, and completely open source. For maximum flexibility, we implemented two virtualization technologies - Kernel-based Virtual Machine (KVM) and container-based virtualization (LXC).<br/><br/>Proxmox VE uses a Linux kernel and is based on the Debian GNU/Linux Distribution. The source code of Proxmox VE is released under the GNU Affero General Public License, version 3. This means that you are free to inspect the source code at any time or contribute to the project yourself.<br/><br/>At Proxmox we are committed to use open source software whenever possible. Using open source software guarantees full access to all functionalities - as well as high security and reliability. We think that everybody should have the right to access the source code of a software to run it, build on it, or submit changes back to the project. Everybody is encouraged to contribute while Proxmox ensures the product always meets professional quality criteria.<br/><br/>Open source software also helps to keep your costs low and makes your core infrastructure independent from a single vendor.</p>
+<p></p><br />Proxmox VE << <a href='Proxmox VE.html'>Previous</a> </div>
         
     <!-- footer -->
       <div class="container">

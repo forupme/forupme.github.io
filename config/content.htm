@@ -1210,14 +1210,23 @@ http {
 <h1>Squid</h1>
 <p><a href="https://www.squid-cache.org/">https://www.squid-cache.org/</a> </p>
 <p><a href="/downloads/proxy基本設定.pdf">proxy基本設定.pdf</a></p>
+<p>sudo apt update</p>
+<p>sudo apt upgrade</p>
+<p>sudo apt autoremove</p>
+<p>sudo apt install squid</p>
+<p>sudo squid -z </p>
+<p>sudo systemctl enable squid</p>
+<p>sudo systemctl start squid</p>
+<p>sudo systemctl stop squid</p>
+<p>sudo systemctl restart squid</p>
+<hr/>
 <p>代理伺服器<br/><br/>代理伺服器是位於用戶端和目標伺服器之間的電腦系統。當客戶端向目標伺服器發起資源請求時，代理伺服器會介入連線，並向目標伺服器發出請求。收到回應後，代理伺服器會將其傳回給用戶端。</p>
 <p>在進階版本中，代理伺服器可以根據各種規則過濾請求，並且可能僅允許在請求符合可用規則的情況下進行通訊。這些規則通常是基於客戶端或目標伺服器的 IP 位址、協定、網頁文件的內容類型、網頁內容類型等。</p>
 <p>代理伺服器的功能非常多樣，可以用來提高效能、增強安全性以及進行流量管理等。以下是各項功能的說明：</p>
 <p><br/>一、降低頻寬使用量<br/><br/>代理伺服器透過快取（Caching）技術來減少對外部伺服器的請求，從而降低頻寬消耗。當用戶訪問某個網頁或資源時，代理伺服器會將該資源保存在本地快取中。如果其他用戶需要相同的資源，代理伺服器就可以直接從快取中提供，而不需要再次向外部伺服器請求。這樣一來，可以有效減少網絡流量並提高使用效率。<br/><br/>二、透過快取網頁文件來縮短頁面載入時間，進而提升使用者瀏覽體驗<br/><br/>快取不僅能夠降低頻寬消耗，還能顯著提升頁面載入速度。當用戶請求某個已經被快取的網頁時，代理伺服器會直接提供快取的版本，避免再次下載資源。這樣可以大幅減少頁面載入時間，特別是在網路延遲較高或帶寬較低的情況下，能顯著改善用戶的瀏覽體驗。<br/><br/>三、強制執行網路存取策略<br/><br/>代理伺服器可以用來強制執行公司或組織的網絡使用政策。例如，代理伺服器可以控制哪些網站可以訪問，哪些網站被阻擋，或設置網路使用的時間限制。這在企業或學校等環境中尤為重要，能夠確保員工或學生只訪問工作相關或學習相關的網站，防止不當使用網絡資源。<br/><br/>四、監控使用者流量或報告單一使用者或使用者群組的網路使用情況<br/><br/>代理伺服器可作為監控和審計的工具。它能夠追蹤每個用戶或用戶群組的網路活動，例如哪些網站被訪問、何時訪問以及訪問的頻率等。這些數據可以用於分析網絡使用模式，發現潛在的問題（如不當使用），以及生成有關使用情況的報告，以便管理員進行管理和調整。</p>
 <p><br/>五、透過不將用戶電腦直接暴露於互聯網上來增強用戶隱私<br/><br/>代理伺服器可以隱藏用戶的真實 IP 地址，通過代理伺服器的 IP 地址來訪問外部網站。這樣，用戶的身份和位置信息將無法直接被目標伺服器獲得，有效保護用戶隱私。此外，這還能避免一些網絡攻擊（如 DDoS 攻擊）直接針對用戶端。<br/><br/>六、在不同的 Web 伺服器之間分配負載，以減輕單一伺服器的負載<br/><br/>負載均衡是一個常見的代理伺服器用途。代理伺服器可以根據預設的負載均衡策略（如輪詢、最少連接等）將流量分配到多個 Web 伺服器。這樣可以避免單一伺服器過載，確保服務的高可用性和性能，並且對用戶而言，網站的響應速度和穩定性也會得到提升。<br/><br/>七、提升效能較差的 Web 伺服器的效能<br/><br/>即使是效能較差的 Web 伺服器，也能通過代理伺服器進行優化。代理伺服器可以將經常訪問的內容進行快取，減少 Web 伺服器的負擔，並提升其處理請求的能力。這樣，即使後端伺服器的性能較差，用戶也能夠獲得更好的使用體驗。</p>
 <p>八、使用整合的病毒/惡意軟體偵測系統過濾請求或回應<br/><br/>一些代理伺服器內建有防病毒和惡意軟體掃描功能，當用戶發送請求或伺服器返回數據時，代理伺服器會檢查內容是否包含病毒、木馬、間諜軟體或其他類型的惡意程式。這能有效地阻止不安全的網站或不良資源進入用戶端，提高網絡安全性。<br/><br/>九、在多個網際網路連線之間平衡網路流量<br/><br/>當企業或組織擁有多條網際網路連線時，代理伺服器可以在這些連線之間進行流量平衡。這樣可以確保即使某一條線路擁塞或發生故障，其他線路可以繼續承擔流量，從而提升網絡的可靠性和穩定性。</p>
-<p>十、在區域網路內中繼流量<br/><br/>代理伺服器也可以用來在區域網路（LAN）內部中繼流量，將內部用戶的請求轉發給外部網絡。這對於需要訪問外部網站或服務的內部用戶來說，可以提供更好的流量管理、監控及安全保障。通過代理伺服器，內部網絡可以有效集中管理和過濾外部流量，減少安全風險。</p>
-<h1>cmsimde</h1>
+<p>十、在區域網路內中繼流量<br/><br/>代理伺服器也可以用來在區域網路（LAN）內部中繼流量，將內部用戶的請求轉發給外部網絡。這對於需要訪問外部網站或服務的內部用戶來說，可以提供更好的流量管理、監控及安全保障。通過代理伺服器，內部網絡可以有效集中管理和過濾外部流量，減少安全風險。</p><h1>cmsimde</h1>
 <p>在 Debian 類 (例如: Ubuntu、Linuxmint、Lubuntu 等) 如何使用 cmsimde 網際內容管理。</p>
 <p>How to use cmsimde under Debian (Ubuntu, Linuxmint ...):</p>
 <p>首先應該要先查詢當下所使用操作系統所配置的 Python 版本，並隨即配合安裝 venv 模組。</p>
@@ -1298,4 +1307,65 @@ TIMEOUTClose = 0</pre><h2>Proxmox VE</h2>
 <p><a href="https://proxmox.com/en/products/proxmox-virtual-environment/overview">Proxmox VE</a></p>
 <p><a href="https://pve.proxmox.com/pve-docs/">https://pve.proxmox.com/pve-docs/</a> </p>
 <p><a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html">https://pve.proxmox.com/pve-docs/pve-admin-guide.html</a> </p>
+<p><a href="https://pve.proxmox.com/wiki/Main_Page">https://pve.proxmox.com/wiki/Main_Page</a> </p>
+<p><a href="https://forum.proxmox.com/">https://forum.proxmox.com/</a> </p>
+<p><a href="https://lists.proxmox.com/pipermail/pve-user/">https://lists.proxmox.com/pipermail/pve-user/</a> </p>
+<p><a href="https://lists.proxmox.com/pipermail/pve-devel/">https://lists.proxmox.com/pipermail/pve-devel/</a> </p>
+<p>下載 Ubuntu server iso:</p>
+<p style="padding-left: 30px;">wget <a href="https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-live-server-amd64.iso">https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-live-server-amd64.iso</a></p><h3>Intro_PVE</h3>
+<p>準備安裝媒體: <a href="https://pve.proxmox.com/wiki/Prepare_Installation_Media">https://pve.proxmox.com/wiki/Prepare_Installation_Media</a> </p>
+<p style="padding-left: 30px;">準備好一個固定的 IPv6 address</p>
+<p style="padding-left: 30px;">將 IPv6 address 與 domain name 在 DNS 伺服器中登記</p>
+<p style="padding-left: 30px;">準備好一個 USB 隨身碟</p>
+<p style="padding-left: 30px;">利用 <a href="https://etcher.balena.io/">https://etcher.balena.io/</a> 將 <a href="https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso">https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso</a> flask 至隨身碟</p>
+<p style="padding-left: 30px;">利用隨身碟開機 (使用 HP server 機體背後的 USB 插槽) 安裝</p>
+<p style="padding-left: 60px;">設定 root 管理者密碼</p>
+<p style="padding-left: 60px;">設定 IPv6 address, Gateway, DNS 伺服器</p>
+<p style="padding-left: 30px;">完成後以伺服器的 IPv6 address 連接: <a href="https://[IPv6_address]:8006">https://[IPv6_address]:8006</a></p>
+<p style="padding-left: 30px;">透過 <a href="https://zh.wikipedia.org/zh-tw/%E8%87%AA%E5%8B%95%E6%86%91%E8%AD%89%E6%9B%B4%E6%96%B0%E7%92%B0%E5%A2%83">ACME</a> 從 <a href="https://certbot.eff.org/hosting_providers">Letsencrypt</a> 取得網站符號名稱認證簽章</p>
+<div class="paragraph">
+<p>The project started in 2007, followed by a first stable version in 2008. At the time we used OpenVZ for containers, and QEMU with KVM for virtual machines. The clustering features were limited, and the user interface was simple (server generated web page).</p>
+</div>
+<div class="paragraph">
+<p>But we quickly developed new features using the <a href="https://corosync.github.io/corosync/">Corosync</a> cluster stack, and the introduction of the new Proxmox cluster file system (pmxcfs) was a big step forward, because it completely hides the cluster complexity from the user. Managing a cluster of 16 nodes is as simple as managing a single node.</p>
+</div>
+<div class="paragraph">
+<p>The introduction of our new REST API, with a complete declarative specification written in JSON-Schema, enabled other people to integrate Proxmox VE into their infrastructure, and made it easy to provide additional services.</p>
+</div>
+<div class="paragraph">
+<p>Also, the new REST API made it possible to replace the original user interface with a modern client side single-page application using JavaScript. We also replaced the old Java based VNC console code with <a href="https://kanaka.github.io/noVNC/">noVNC</a>. So you only need a web browser to manage your VMs.</p>
+</div>
+<div class="paragraph">
+<p>The support for various storage types is another big task. Notably, Proxmox VE was the first distribution to ship <a href="https://zfsonlinux.org/">ZFS on Linux</a> by default in 2014. Another milestone was the ability to run and manage <a href="https://ceph.com/">Ceph</a> storage on the hypervisor nodes. Such setups are extremely cost effective.</p>
+</div>
+<div class="paragraph">
+<p>When our project started we were among the first companies providing commercial support for KVM. The KVM project itself continuously evolved, and is now a widely used hypervisor. New features arrive with each release. We developed the KVM live backup feature, which makes it possible to create snapshot backups on any storage type.</p>
+</div>
+<div class="paragraph">
+<p>The most notable change with version 4.0 was the move from OpenVZ to <a href="https://linuxcontainers.org/">LXC</a>. Containers are now deeply integrated, and they can use the same storage and network features as virtual machines. At the same time we introduced the easy-to-use <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#chapter_ha_manager">High Availability (HA) manager</a>, simplifying the configuration and management of highly available setups.</p>
+</div>
+<div class="paragraph">
+<p>During the development of Proxmox VE 5 the asynchronous <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#chapter_pvesr">storage replication</a> as well as automated <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#sysadmin_certificate_management">certificate management</a> using ACME/Let’s Encrypt were introduced, among many other features.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#chapter_pvesdn">Software Defined Network (SDN)</a> stack was developed in cooperation with our community. It was integrated into the web interface as an experimental feature in version 6.2, simplifying the management of sophisticated network configurations. Since version 8.1, the SDN integration is fully supported and installed by default.</p>
+</div>
+<div class="paragraph">
+<p>2020 marked the release of a new project, the <a href="https://www.proxmox.com/en/products/proxmox-backup-server/overview">Proxmox Backup Server</a>, written in the Rust programming language. Proxmox Backup Server is deeply integrated with Proxmox VE and significantly improves backup capabilities by implementing incremental backups, deduplication, and much more.</p>
+</div>
+<div class="paragraph">
+<p>Another new tool, the <a href="https://pom.proxmox.com">Proxmox Offline Mirror</a>, was released in 2022, enabling subscriptions for systems which have no connection to the public internet.</p>
+</div>
+<div class="paragraph">
+<p>The highly requested dark theme for the web interface was introduced in 2023. Later that year, version 8.0 integrated access to the Ceph enterprise repository. Now access to the most stable Ceph repository comes with any Proxmox VE subscription.</p>
+</div>
+<div class="paragraph">
+<p>Automated and unattended installation for the official <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#installation_installer">ISO installer</a> was introduced in version 8.2, significantly simplifying large deployments of Proxmox VE.</p>
+</div>
+<div class="paragraph">
+<p>With the <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#qm_import_virtual_machines">import wizard</a>, equally introduced in version 8.2, users can easily and efficiently migrate guests directly from other hypervisors like VMware ESXi <span class="footnote" data-note='Migrate to Proxmox VE
+&lt;a href="https://pve.proxmox.com/wiki/Migrate_to_Proxmox_VE"&gt;https://pve.proxmox.com/wiki/Migrate_to_Proxmox_VE&lt;/a&gt;'>[<a class="footnote" href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html#_footnote_1" id="_footnoteref_1" title="View footnote">1</a>]</span>. Additionally, archives in Open Virtualization Format (OVF/OVA) can now be directly imported from file-based storages in the web interface.</p>
+</div>
+<p>From <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html">https://pve.proxmox.com/pve-docs/pve-admin-guide.html</a> </p>
+<p>Proxmox VE is a platform to run virtual machines and containers. It is based on Debian Linux, and completely open source. For maximum flexibility, we implemented two virtualization technologies - Kernel-based Virtual Machine (KVM) and container-based virtualization (LXC).<br/><br/>Proxmox VE uses a Linux kernel and is based on the Debian GNU/Linux Distribution. The source code of Proxmox VE is released under the GNU Affero General Public License, version 3. This means that you are free to inspect the source code at any time or contribute to the project yourself.<br/><br/>At Proxmox we are committed to use open source software whenever possible. Using open source software guarantees full access to all functionalities - as well as high security and reliability. We think that everybody should have the right to access the source code of a software to run it, build on it, or submit changes back to the project. Everybody is encouraged to contribute while Proxmox ensures the product always meets professional quality criteria.<br/><br/>Open source software also helps to keep your costs low and makes your core infrastructure independent from a single vendor.</p>
 <p></p>
