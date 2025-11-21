@@ -12,7 +12,11 @@
 <p>本網站 UR: <a href="https://eng.nfu.edu.tw">https://eng.nfu.edu.tw</a> </p>
 <p>本網站倉儲: <a href="https://github.com/forupme/forupme.github.io">https://github.com/forupme/forupme.github.io</a></p>
 <p>討論: <a href="https://github.com/forupme/forupme.github.io/discussions">https://github.com/forupme/forupme.github.io/discussions</a> </p>
-<h2>MISC</h2>
+<h2>Reveal</h2>
+<p>利用 Python 的 <a href="https://github.com/scrum-1/respysive-slide">https://github.com/scrum-1/respysive-slide</a> 模組建立 Reveal 簡報。</p>
+<p><a href="/downloads/reveal_file.py">reveal_file.py</a></p>
+<p>reveal 與 downloads 目錄則放入 <a href="/downloads/assets.7z">assets.7z</a></p>
+<p></p><h2>MISC</h2>
 <h4>Fossil SCM</h4>
 <h4>網際伺服器:</h4>
 <p style="padding-left: 30px;">Windows: fossil server C:\pj2022\repo\pj2022.fossil --port 9000 --https</p>
@@ -68,8 +72,7 @@ CALLBACK_URL = flask_forum
 <h4 style="padding-left: 30px;">URIs:</h4>
 <p style="padding-left: 60px;"><a href="https://pme.eng.nfu.edu.tw:8443">https://pme.eng.nfu.edu.tw:8443</a></p>
 <h4>Authorised redirect URIs</h4>
-<p style="padding-left: 60px;"><a href="https://pme.eng.nfu.edu.tw:8443/login/google/">https://pme.eng.nfu.edu.tw:8443/login/google/</a></p>
-<h2>GW</h2>
+<p style="padding-left: 60px;"><a href="https://pme.eng.nfu.edu.tw:8443/login/google/">https://pme.eng.nfu.edu.tw:8443/login/google/</a></p><h2>GW</h2>
 <p>Google Workspace 應用:</p>
 <p><a href="https://edu.google.com/intl/ALL_tw/workspace-for-education/editions/overview/">https://edu.google.com/intl/ALL_tw/workspace-for-education/editions/overview/</a> </p>
 <p>使用 Python + Flask 建立一個網頁介面，讓管理員透過網頁表單自動在 Google Workspace（前 G Suite）中建立新的 email address（即新增用戶）。<br/><br/>必備條件:<br/><br/>1. Google Workspace 管理員權限：你必須擁有管理員帳號才能新增使用者。<br/>2. Google Cloud Platform 專案：你需要在 GCP 建立一個專案並啟用 [Admin SDK API](https://console.developers.google.com/apis/library/admin.googleapis.com)。<br/>3. 建立服務帳戶（Service Account）並授權 Domain-wide Delegation：這樣 Flask 應用就能以管理員身分進行操作。<br/>4. 下載服務帳戶金鑰（JSON）：Flask 會用這個來驗證。<br/>5. 設定 Google Workspace 的管理員 Email：Flask 會用於 impersonate。<br/><br/>安裝模組:</p>
