@@ -131,7 +131,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li><a href='Reveal.html'>Reveal</a><li><a href='MISC.html'>MISC</a><li><a href='GW.html'>GW</a><li><a href='Webots.html'>Webots</a><li><a href='FossilSCM.html'>FossilSCM</a><li><a href='Reeborg.html'>Reeborg</a><li><a href='NX2312.html'>NX2312</a><li><a href='Brython.html'>Brython</a></li></ul><li class='has-children'><a href='RL.html'>RL</a><ul class='dropdown'><li><a href='Rocket.html'>Rocket</a><li><a href='PGP.html'>PGP</a></li></ul><li class='has-children'><a href='Linux.html'>Linux</a><ul class='dropdown'><li><a href='Lubuntu.html'>Lubuntu</a><li><a href='Windows.html'>Windows</a></li></ul><li><a href='Bind.html'>Bind</a><li><a href='Squid.html'>Squid</a><li><a href='cmsimde.html'>cmsimde</a><li class='has-children'><a href='VM.html'>VM</a><ul class='dropdown'><li><a href='Virtualbox.html'>Virtualbox</a><li class='has-children'><a href='Proxmox VE.html'>Proxmox VE</a><ul class='dropdown'><li><a href='Intro_PVE.html'>Intro_PVE</a></li>
+                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li><a href='Reveal.html'>Reveal</a><li><a href='Brython.html'>Brython</a></li></ul><li class='has-children'><a href='Linux.html'>Linux</a><ul class='dropdown'><li><a href='Lubuntu.html'>Lubuntu</a><li><a href='Windows.html'>Windows</a></li></ul><li><a href='Bind.html'>Bind</a><li><a href='Squid.html'>Squid</a><li><a href='cmsimde.html'>cmsimde</a><li class='has-children'><a href='VM.html'>VM</a><ul class='dropdown'><li><a href='Virtualbox.html'>Virtualbox</a><li class='has-children'><a href='Proxmox VE.html'>Proxmox VE</a><ul class='dropdown'><li><a href='Intro_PVE.html'>Intro_PVE</a></li>
                       </ul>
                 </nav>
               </div>
@@ -143,16 +143,49 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">Proxmox VE << <a href='Proxmox VE.html'>Previous</a> <br /><h1>Intro_PVE</h1>
-<p>準備安裝媒體: <a href="https://pve.proxmox.com/wiki/Prepare_Installation_Media">https://pve.proxmox.com/wiki/Prepare_Installation_Media</a> </p>
-<p style="padding-left: 30px;">準備好一個固定的 IPv6 address</p>
-<p style="padding-left: 30px;">將 IPv6 address 與 domain name 在 DNS 伺服器中登記</p>
-<p style="padding-left: 30px;">準備好一個 USB 隨身碟</p>
-<p style="padding-left: 30px;">利用 <a href="https://etcher.balena.io/">https://etcher.balena.io/</a> 將 <a href="https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso">https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso</a> flask 至隨身碟</p>
-<p style="padding-left: 30px;">利用隨身碟開機 (使用 HP server 機體背後的 USB 插槽) 安裝</p>
-<p style="padding-left: 60px;">設定 root 管理者密碼</p>
-<p style="padding-left: 60px;">設定 IPv6 address, Gateway, DNS 伺服器</p>
-<p style="padding-left: 30px;">完成後以伺服器的 IPv6 address 連接: <a href="https://[IPv6_address]:8006">https://[IPv6_address]:8006</a></p>
-<p style="padding-left: 30px;">透過 <a href="https://zh.wikipedia.org/zh-tw/%E8%87%AA%E5%8B%95%E6%86%91%E8%AD%89%E6%9B%B4%E6%96%B0%E7%92%B0%E5%A2%83">ACME</a> 從 <a href="https://certbot.eff.org/hosting_providers">Letsencrypt</a> 取得網站符號名稱認證簽章</p>
+<p>電腦裸機安裝:</p>
+<p style="padding-left: 30px;">準備安裝媒體: <a href="https://pve.proxmox.com/wiki/Prepare_Installation_Media">https://pve.proxmox.com/wiki/Prepare_Installation_Media</a> </p>
+<p style="padding-left: 60px;">準備好一個固定的 IPv6 address</p>
+<p style="padding-left: 60px;">將 IPv6 address 與 domain name 在 DNS 伺服器中登記</p>
+<p style="padding-left: 60px;">準備好一個 USB 隨身碟</p>
+<p style="padding-left: 60px;">利用 <a href="https://etcher.balena.io/">https://etcher.balena.io/</a> 將 <a href="https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso">https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso</a> flask 至隨身碟</p>
+<p style="padding-left: 60px;">利用隨身碟開機 (使用 HP server 機體背後的 USB 插槽) 安裝</p>
+<p style="padding-left: 90px;">設定 root 管理者密碼</p>
+<p style="padding-left: 90px;">設定 IPv6 address, Gateway, DNS 伺服器</p>
+<p style="padding-left: 60px;">完成後以伺服器的 IPv6 address 連接: <a href="https://[IPv6_address]:8006">https://[IPv6_address]:8006</a></p>
+<p style="padding-left: 60px;">透過 <a href="https://zh.wikipedia.org/zh-tw/%E8%87%AA%E5%8B%95%E6%86%91%E8%AD%89%E6%9B%B4%E6%96%B0%E7%92%B0%E5%A2%83">ACME</a> 從 <a href="https://certbot.eff.org/hosting_providers">Letsencrypt</a> 取得網站符號名稱認證簽章</p>
+<p>Virtualbox 環境下安裝:</p>
+<p style="padding-left: 30px;">下載 <a href="https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso">https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso</a></p>
+<p style="padding-left: 30px;">在 VirtualBox 上安裝 Proxmox VE 時，以下是需要設定的項目：</p>
+<p style="padding-left: 30px;">General: 作業系統 Linux，版本選擇 Debian (64-bit)</p>
+<p style="padding-left: 30px;">System: Chipset ICP9，勾選 I/O APIC、UEFI, Processor 勾選 Enable PAX/NX 以及 VT-x/AMD-V</p>
+<p style="padding-left: 30px;">Display: 勾選 3D 加速</p>
+<p style="padding-left: 30px;">Network: Bridged Adapter<br/><br/>虛擬硬碟類型選擇 VDI，硬碟大小 500 GB<br/><br/>網路選擇 Bridged Adapter</p>
+<p style="padding-left: 30px;">處理器設定 2 核心以上</p>
+<p style="padding-left: 30px;">光碟機選擇下載的 Proxmox VE 安裝映像檔（.iso）<br/><br/>Chipset 選擇 ICH9</p>
+<p style="padding-left: 30px;">wget <a href="https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-live-server-amd64.iso">https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-live-server-amd64.iso</a></p>
+<p>利用 shell 指令建立 vm:</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false"># 1. 建立空 VM
+qm create 100 \
+  --name ubuntu-test \
+  --memory 2048 \
+  --cores 2 \
+  --net0 virtio,bridge=vmbr0 \
+  --ostype l26
+
+# 2. 加入安裝 ISO
+qm set 100 --cdrom local:iso/ubuntu.iso
+
+# 3. 建立虛擬磁碟
+qm set 100 --scsihw virtio-scsi-pci --scsi0 local-lvm:16
+
+# 4. 設定開機順序
+qm set 100 --boot order=scsi0;ide2
+
+# 5. 啟動 VM
+qm start 100
+</pre>
+<p></p>
 <div class="paragraph">
 <p>The project started in 2007, followed by a first stable version in 2008. At the time we used OpenVZ for containers, and QEMU with KVM for virtual machines. The clustering features were limited, and the user interface was simple (server generated web page).</p>
 </div>
