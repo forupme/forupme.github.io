@@ -13,8 +13,12 @@
 <p>本網站倉儲: <a href="https://github.com/forupme/forupme.github.io">https://github.com/forupme/forupme.github.io</a></p>
 <p>討論: <a href="https://github.com/forupme/forupme.github.io/discussions">https://github.com/forupme/forupme.github.io/discussions</a> </p>
 <h2>Reveal</h2>
+<p>利用 Python 的 <a href="https://github.com/scrum-1/respysive-slide">https://github.com/scrum-1/respysive-slide</a> 模組建立 Reveal 簡報。</p>
 <p><a href="/downloads/reveal_file.py">reveal_file.py</a></p>
-<p>reveal 與 downloads 目錄則放入 <a href="/downloads/assets.7z">assets.7z</a></p><h2>MISC</h2>
+<p>reveal 與 downloads 目錄則放入 <a href="/downloads/assets.7z">assets.7z</a></p>
+<p></p><h2>Pdf</h2>
+<p><a href="https://github.com/Kerbalnut/Sanitize-PDF">https://github.com/Kerbalnut/Sanitize-PDF</a> </p>
+<h2>MISC</h2>
 <h4>Fossil SCM</h4>
 <h4>網際伺服器:</h4>
 <p style="padding-left: 30px;">Windows: fossil server C:\pj2022\repo\pj2022.fossil --port 9000 --https</p>
@@ -946,7 +950,7 @@ doc["aitetris"].bind("click", aitetris.do)
 <p><a href="https://www.rocksim.com/">https://www.rocksim.com/</a> </p>
 <p>Rocketpy + Webots</p>
 <h2>PGP</h2>
-<p><a href="https://www.gpg4win.org/">https://www.gpg4win.org/</a> </p><h1>Linux</h1>
+<p><a href="https://www.gpg4win.org/">https://www.gpg4win.org/</a> </p><h1>OS</h1>
 <p>舊電腦替換 Windows 10 操作系統，<a href="https://linuxmint.com/">Linuxmint</a> 是其中ㄧ個不錯的選項。</p>
 <p><span style="background-color: #ffff00;">Netplan 網路設定</span>：</p>
 <p style="padding-left: 30px;">先利用 ifconfig 查詢網卡代號後，選擇已經連線的網卡進行設定：</p>
@@ -986,8 +990,7 @@ doc["aitetris"].bind("click", aitetris.do)
 <p style="padding-left: 30px;">ibus-setup</p>
 <p style="padding-left: 30px;">ibus restart</p>
 <p><span style="background-color: #ffff00;">文字編輯器</span>：</p>
-<p style="padding-left: 30px;">sudo apt install scite</p>
-<h2>Lubuntu</h2>
+<p style="padding-left: 30px;">sudo apt install scite</p><h2>Lubuntu</h2>
 <p>Letsencrypt: <a href="https://certbot.eff.org/instructions">https://certbot.eff.org/instructions</a> </p>
 <p>add s1.eng.nfu.edu.tw into DNS server</p>
 <p><a href="https://certbot.eff.org/instructions?ws=nginx&amp;os=pip">https://certbot.eff.org/instructions?ws=nginx&amp;os=pip</a></p>
@@ -1250,6 +1253,11 @@ http {
 <p style="padding-left: 30px;">(cmsimde) $ deactivate</p>
 <h1>VM</h1>
 <h2>Virtualbox</h2>
+<p>在 Virtualbox 中配置 Proxmox VE 時:</p>
+<p style="padding-left: 30px;">OS 選擇 Linux - Debian</p>
+<p style="padding-left: 30px;">Chipset 選用較新的 ICH9</p>
+<p style="padding-left: 30px;">網路選擇 Bridged Adapter</p>
+<p style="padding-left: 30px;">EFI 選擇 Enabled</p>
 <p><a href="https://www.virtualbox.org/">https://www.virtualbox.org/</a> </p>
 <hr/>
 <p>cmsimde 網際內容管理系統的啟動分為開發模式 (development) 與生產模式 (production):</p>
@@ -1314,16 +1322,31 @@ TIMEOUTClose = 0</pre><h2>Proxmox VE</h2>
 <p><a href="https://lists.proxmox.com/pipermail/pve-devel/">https://lists.proxmox.com/pipermail/pve-devel/</a> </p>
 <p>下載 Ubuntu server iso:</p>
 <p style="padding-left: 30px;">wget <a href="https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-live-server-amd64.iso">https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-live-server-amd64.iso</a></p><h3>Intro_PVE</h3>
-<p>準備安裝媒體: <a href="https://pve.proxmox.com/wiki/Prepare_Installation_Media">https://pve.proxmox.com/wiki/Prepare_Installation_Media</a> </p>
-<p style="padding-left: 30px;">準備好一個固定的 IPv6 address</p>
-<p style="padding-left: 30px;">將 IPv6 address 與 domain name 在 DNS 伺服器中登記</p>
-<p style="padding-left: 30px;">準備好一個 USB 隨身碟</p>
-<p style="padding-left: 30px;">利用 <a href="https://etcher.balena.io/">https://etcher.balena.io/</a> 將 <a href="https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso">https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso</a> flask 至隨身碟</p>
-<p style="padding-left: 30px;">利用隨身碟開機 (使用 HP server 機體背後的 USB 插槽) 安裝</p>
-<p style="padding-left: 60px;">設定 root 管理者密碼</p>
-<p style="padding-left: 60px;">設定 IPv6 address, Gateway, DNS 伺服器</p>
-<p style="padding-left: 30px;">完成後以伺服器的 IPv6 address 連接: <a href="https://[IPv6_address]:8006">https://[IPv6_address]:8006</a></p>
-<p style="padding-left: 30px;">透過 <a href="https://zh.wikipedia.org/zh-tw/%E8%87%AA%E5%8B%95%E6%86%91%E8%AD%89%E6%9B%B4%E6%96%B0%E7%92%B0%E5%A2%83">ACME</a> 從 <a href="https://certbot.eff.org/hosting_providers">Letsencrypt</a> 取得網站符號名稱認證簽章</p>
+<p>電腦裸機安裝:</p>
+<p style="padding-left: 30px;">準備安裝媒體: <a href="https://pve.proxmox.com/wiki/Prepare_Installation_Media">https://pve.proxmox.com/wiki/Prepare_Installation_Media</a> </p>
+<p style="padding-left: 60px;">準備好一個固定的 IPv6 address</p>
+<p style="padding-left: 60px;">將 IPv6 address 與 domain name 在 DNS 伺服器中登記</p>
+<p style="padding-left: 60px;">準備好一個 USB 隨身碟</p>
+<p style="padding-left: 60px;">利用 <a href="https://etcher.balena.io/">https://etcher.balena.io/</a> 將 <a href="https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso">https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso</a> flask 至隨身碟</p>
+<p style="padding-left: 60px;">利用隨身碟開機 (使用 HP server 機體背後的 USB 插槽) 安裝</p>
+<p style="padding-left: 90px;">設定 root 管理者密碼</p>
+<p style="padding-left: 90px;">設定 IPv6 address, Gateway, DNS 伺服器</p>
+<p style="padding-left: 60px;">完成後以伺服器的 IPv6 address 連接: <a href="https://[IPv6_address]:8006">https://[IPv6_address]:8006</a></p>
+<p style="padding-left: 60px;">透過 <a href="https://zh.wikipedia.org/zh-tw/%E8%87%AA%E5%8B%95%E6%86%91%E8%AD%89%E6%9B%B4%E6%96%B0%E7%92%B0%E5%A2%83">ACME</a> 從 <a href="https://certbot.eff.org/hosting_providers">Letsencrypt</a> 取得網站符號名稱認證簽章</p>
+<p>Virtualbox 環境下安裝:</p>
+<p style="padding-left: 30px;">下載 <a href="https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso">https://enterprise.proxmox.com/iso/proxmox-ve_9.1-1.iso</a></p>
+<p style="padding-left: 30px;">在 VirtualBox 上安裝 Proxmox VE 時，以下是需要設定的項目：</p>
+<p style="padding-left: 30px;">General: 作業系統 Linux，版本選擇 Debian (64-bit)</p>
+<p style="padding-left: 30px;">System: Chipset ICP9，勾選 I/O APIC、UEFI, Processor 勾選 Enable PAX/NX 以及 VT-x/AMD-V</p>
+<p style="padding-left: 30px;">Display: 勾選 3D 加速</p>
+<p style="padding-left: 30px;">Network: Bridged Adapter</p>
+<p style="padding-left: 60px;"></p>
+<p style="padding-left: 30px;"><br/><br/><br/><br/>虛擬硬碟類型選擇 VDI，硬碟大小 500 GB<br/><br/>網路選擇 Bridged Adapter</p>
+<p style="padding-left: 30px;">處理器設定 2 核心以上</p>
+<p style="padding-left: 30px;">光碟機選擇下載的 Proxmox VE 安裝映像檔（.iso）<br/><br/>Chipset 選擇 ICH9</p>
+<p style="padding-left: 30px;"></p>
+<p style="padding-left: 30px;"></p>
+<hr/>
 <div class="paragraph">
 <p>The project started in 2007, followed by a first stable version in 2008. At the time we used OpenVZ for containers, and QEMU with KVM for virtual machines. The clustering features were limited, and the user interface was simple (server generated web page).</p>
 </div>
