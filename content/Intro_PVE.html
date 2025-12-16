@@ -185,7 +185,10 @@ qm set 100 --boot order=scsi0;ide2
 # 5. 啟動 VM
 qm start 100
 </pre>
-<p></p>
+<p>PVE Debian 操作系統中的 ACME 網域認證如何設定?</p>
+<p style="padding-left: 30px;">一台電腦安裝 Proxmox PVE Debian 操作系統之後，管理者可以透過 https 加上 IP 位址或對應的網域符號名稱，可以在 8006 埠號，以 https 協定連接。其內建的管理者帳號為: root</p>
+<p style="padding-left: 30px;">啟動後的 PVE，可以透過 Certificate 中新增 ACME account 之後，從 Letsencrypt's 取得網域的數位簽證，完成後，管理者可以透過 https:// 協定進行連接，即便未設定 Letsencrypt's 網域數位簽證，PVE 仍可以 self-signed 的簽章，以 https:// 進行連線</p>
+<hr/>
 <div class="paragraph">
 <p>The project started in 2007, followed by a first stable version in 2008. At the time we used OpenVZ for containers, and QEMU with KVM for virtual machines. The clustering features were limited, and the user interface was simple (server generated web page).</p>
 </div>

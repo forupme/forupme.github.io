@@ -152,7 +152,50 @@ img.add_border {
 <p><a href="https://lists.proxmox.com/pipermail/pve-devel/">https://lists.proxmox.com/pipermail/pve-devel/</a> </p>
 <p>下載 Ubuntu server iso:</p>
 <p style="padding-left: 30px;">wget <a href="https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-live-server-amd64.iso">https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-live-server-amd64.iso</a></p>
-<br />Virtualbox << <a href='Virtualbox.html'>Previous</a> <a href='Intro_PVE.html'>Next</a> >> Intro_PVE</div>
+<p>在 NFU 網段中可<a href="https://software.nfu.edu.tw/Windows/tw/SW_DVD9_Win_Pro_11_24H2.3_64BIT_ChnTrad_Pro_Ent_EDU_N_MLF_X23-93524.ISO">下載 Win11 iso</a> (64位元 24H2 for Intel/AMD)，以及 <a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.285-1/">virtio-win.iso</a></p>
+<p><a href="./../downloads/pve_install_win11_vm.pdf">pve_install_win11_vm.pdf</a></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>设置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BIOS</td>
+<td><strong>OVMF (UEFI)</strong></td>
+</tr>
+<tr>
+<td>Machine</td>
+<td><strong>q35</strong></td>
+</tr>
+<tr>
+<td>SCSI Controller</td>
+<td>VirtIO SCSI single</td>
+</tr>
+<tr>
+<td>TPM</td>
+<td><strong>Add TPM</strong></td>
+</tr>
+<tr>
+<td>TPM Storage</td>
+<td>local-lvm（或你自己的存储）</td>
+</tr>
+<tr>
+<td>TPM Version</td>
+<td><strong>2.0</strong></td>
+</tr>
+<tr>
+<td>Secure Boot</td>
+<td><strong>勾选</strong></td>
+</tr>
+<tr>
+<td>EFI Storage</td>
+<td>local-lvm（必须）</td>
+</tr>
+</tbody>
+</table><br />Virtualbox << <a href='Virtualbox.html'>Previous</a> <a href='Intro_PVE.html'>Next</a> >> Intro_PVE</div>
         
     <!-- footer -->
       <div class="container">
