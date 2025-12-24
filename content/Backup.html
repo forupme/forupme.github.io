@@ -143,9 +143,13 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">Intro_PVE << <a href='Intro_PVE.html'>Previous</a> <br /><h1>Backup</h1>
+<p>Backup 檔案名稱不可以更改。</p>
 <p>取下 Backup file: scp -v root@your_pve:/var/lib/vz/dump/win10.vma.zst win10.vma.zst </p>
 <p>上傳 Backup file: scp win11.vma.zst <a href="mailto:root@your_pve:/var/lib/vz/dump/">root@your_pve:/var/lib/vz/dump/</a></p>
-<p>Restore: 選擇 local 中的 .vma.zst 後，選擇 Restore</p><br />Intro_PVE << <a href='Intro_PVE.html'>Previous</a> </div>
+<p>Restore: 選擇 local 中的 .vma.zst 後，選擇 Restore</p>
+<p>利用指令 Restore:</p>
+<p>qmrestore /var/lib/vz/dump/vzdump-qemu-100-2025_12_24-22_26_17.vma.zst 200 --storage local-lvm --unique</p>
+<p>qmrestore /var/lib/vz/dump/vzdump-qemu-101-2025_12_24-22_26_17.vma.zst 200 --storage local --unique</p><br />Intro_PVE << <a href='Intro_PVE.html'>Previous</a> </div>
         
     <!-- footer -->
       <div class="container">

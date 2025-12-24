@@ -767,5 +767,9 @@ qm start 100
 <p>From <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html">https://pve.proxmox.com/pve-docs/pve-admin-guide.html</a> </p>
 <p>Proxmox VE is a platform to run virtual machines and containers. It is based on Debian Linux, and completely open source. For maximum flexibility, we implemented two virtualization technologies - Kernel-based Virtual Machine (KVM) and container-based virtualization (LXC).<br/><br/>Proxmox VE uses a Linux kernel and is based on the Debian GNU/Linux Distribution. The source code of Proxmox VE is released under the GNU Affero General Public License, version 3. This means that you are free to inspect the source code at any time or contribute to the project yourself.<br/><br/>At Proxmox we are committed to use open source software whenever possible. Using open source software guarantees full access to all functionalities - as well as high security and reliability. We think that everybody should have the right to access the source code of a software to run it, build on it, or submit changes back to the project. Everybody is encouraged to contribute while Proxmox ensures the product always meets professional quality criteria.<br/><br/>Open source software also helps to keep your costs low and makes your core infrastructure independent from a single vendor.</p>
 <h3>Backup</h3>
+<p>Backup 檔案名稱不可以更改。</p>
 <p>取下 Backup file: scp -v root@your_pve:/var/lib/vz/dump/win10.vma.zst win10.vma.zst </p>
-<p>上傳 Backup file: scp win11.vma.zst root@your_pve:/var/lib/vz/dump/</p>
+<p>上傳 Backup file: scp win11.vma.zst <a href="mailto:root@your_pve:/var/lib/vz/dump/">root@your_pve:/var/lib/vz/dump/</a></p>
+<p>Restore: 選擇 local 中的 .vma.zst 後，選擇 Restore</p>
+<p>利用指令 Restore:</p>
+<p>qmrestore /var/lib/vz/dump/vzdump-qemu-100-2025_12_24-22_26_17.vma.zst 200 --storage local-lvm --unique</p>
