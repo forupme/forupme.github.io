@@ -249,7 +249,10 @@ doc["aitetris"].bind("click", aitetris.do)
 <!-- editor2 結束 --><hr/>
 <p></p>
 <p></p>
-<h1>Linux</h1>
+<h3>waitress</h3>
+<p><a href="https://github.com/mdecycu/brython_proj">https://github.com/mdecycu/brython_proj</a> </p>
+<p><a href="https://github.com/mdecycu/cp_final_ex">https://github.com/mdecycu/cp_final_ex</a> </p>
+<p><a href="https://github.com/mdecycu/angrybird">https://github.com/mdecycu/angrybird</a> </p><h1>Linux</h1>
 <p>舊電腦替換 Windows 10 操作系統，<a href="https://linuxmint.com/">Linuxmint</a> 是其中ㄧ個不錯的選項。</p>
 <p><span style="background-color: #ffff00;">Netplan 網路設定</span>：</p>
 <p style="padding-left: 30px;">先利用 ifconfig 查詢網卡代號後，選擇已經連線的網卡進行設定：</p>
@@ -289,8 +292,7 @@ doc["aitetris"].bind("click", aitetris.do)
 <p style="padding-left: 30px;">ibus-setup</p>
 <p style="padding-left: 30px;">ibus restart</p>
 <p><span style="background-color: #ffff00;">文字編輯器</span>：</p>
-<p style="padding-left: 30px;">sudo apt install scite</p>
-<h2>Lubuntu</h2>
+<p style="padding-left: 30px;">sudo apt install scite</p><h2>Lubuntu</h2>
 <p>Letsencrypt: <a href="https://certbot.eff.org/instructions">https://certbot.eff.org/instructions</a> </p>
 <p>add s1.eng.nfu.edu.tw into DNS server</p>
 <p><a href="https://certbot.eff.org/instructions?ws=nginx&amp;os=pip">https://certbot.eff.org/instructions?ws=nginx&amp;os=pip</a></p>
@@ -624,7 +626,7 @@ TIMEOUTClose = 0</pre>
 <p>下載 Ubuntu server iso:</p>
 <p style="padding-left: 30px;">wget <a href="https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-live-server-amd64.iso">https://releases.ubuntu.com/24.04.3/ubuntu-24.04.3-live-server-amd64.iso</a></p>
 <p>在 NFU 網段中可<a href="https://software.nfu.edu.tw/Windows/tw/SW_DVD9_Win_Pro_11_24H2.3_64BIT_ChnTrad_Pro_Ent_EDU_N_MLF_X23-93524.ISO">下載 Win11 iso</a> (64位元 24H2 for Intel/AMD)，以及 <a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.285-1/">virtio-win.iso</a> (網路驅動程式選擇 NetKVM 目錄下的 AMD/win11 目錄)</p>
-<p>Shift + F10 可帶出設定畫面過程的命令列視窗</p>
+<p>Shift + F10 可帶出設定畫面過程的命令列視窗後，進入 virtio-win.iso 對應的磁碟後，在命令列中執行 virtio-win-guest-tools.exe。</p>
 <p><a href="https://qemu.weilnetz.de/w64/2025/">https://qemu.weilnetz.de/w64/2025/</a> </p>
 <p><a href="/downloads/pve_install_win11_vm.pdf">pve_install_win11_vm.pdf</a></p>
 <table>
@@ -764,4 +766,6 @@ qm start 100
 </div>
 <p>From <a href="https://pve.proxmox.com/pve-docs/pve-admin-guide.html">https://pve.proxmox.com/pve-docs/pve-admin-guide.html</a> </p>
 <p>Proxmox VE is a platform to run virtual machines and containers. It is based on Debian Linux, and completely open source. For maximum flexibility, we implemented two virtualization technologies - Kernel-based Virtual Machine (KVM) and container-based virtualization (LXC).<br/><br/>Proxmox VE uses a Linux kernel and is based on the Debian GNU/Linux Distribution. The source code of Proxmox VE is released under the GNU Affero General Public License, version 3. This means that you are free to inspect the source code at any time or contribute to the project yourself.<br/><br/>At Proxmox we are committed to use open source software whenever possible. Using open source software guarantees full access to all functionalities - as well as high security and reliability. We think that everybody should have the right to access the source code of a software to run it, build on it, or submit changes back to the project. Everybody is encouraged to contribute while Proxmox ensures the product always meets professional quality criteria.<br/><br/>Open source software also helps to keep your costs low and makes your core infrastructure independent from a single vendor.</p>
-<p></p>
+<h3>Backup</h3>
+<p>取下 Backup file: scp -v root@your_pve:/var/lib/vz/dump/win10.vma.zst win10.vma.zst </p>
+<p>上傳 Backup file: scp win11.vma.zst root@your_pve:/var/lib/vz/dump/</p>
