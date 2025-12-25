@@ -774,3 +774,13 @@ qm start 100
 <p>利用指令 Restore:</p>
 <p>qmrestore /var/lib/vz/dump/vzdump-qemu-100-2025_12_24-22_26_17.vma.zst 200 --storage local-lvm --unique</p>
 <p>qmrestore /var/lib/vz/dump/vzdump-qemu-101-2025_12_24-22_26_17.vma.zst 200 --storage local --unique</p>
+<p>管理者身分開啟的 cmd:</p>
+<p>net user username /add</p>
+<p>net user username /delete</p>
+<p>刪除特定使用者的目錄:</p>
+<p>rmdir /s /q c:\users\username</p>
+<p>Under node shell:</p>
+<p style="padding-left: 30px;">查詢 ID 101 VM 設定:</p>
+<p style="padding-left: 60px;">qm config 101</p>
+<p style="padding-left: 30px;">確定所使用硬碟介面為 sata0 之後，加大硬碟容量 50G:</p>
+<p style="padding-left: 60px;">qm resize 101 sata0 +50G</p>
